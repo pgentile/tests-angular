@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" ng-app>
   <head>
     <title>Bootstrap 101 Template</title>
     <meta charset="utf-8">
@@ -7,10 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/static/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link href="/static/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet">
+    <script src="/static/angular/angular.js"></script>
   </head>
   <body>
     <div class="container-fluid">
-      <h1>Hello, world!</h1>
+      <h1>Salut, {{ 'Tête de bite' }} !</h1>
+      <p>Petit calcul : 1 + 2 = {{ 1 + 2 }}</p>
     </div>
       
     <script src="/static/jquery/dist/jquery.js"></script>
