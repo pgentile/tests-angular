@@ -1,0 +1,17 @@
+{
+  "name": "tests-angularjs",
+  "version": "0.0.1",
+  "description": "Tests d'AngularJS",
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "express": "^4.4.5",
+    "gulp": "^3.8.5",
+    "gulp-bower": "^0.0.6"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pierre Gentile",
+  "license": "MIT"
+}
