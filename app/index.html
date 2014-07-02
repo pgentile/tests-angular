@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" ng-app>
+<html lang="fr" ng-app="dashboardApp">
   <head>
     <title>Bootstrap 101 Template</title>
     <meta charset="utf-8">
@@ -8,11 +8,21 @@
     <link href="/static/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link href="/static/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet">
     <script src="/static/angular/angular.js"></script>
+    <script src="/js/controllers.js"></script>
   </head>
-  <body>
+  <body ng-controller="GraphController">
     <div class="container-fluid">
+      
       <h1>Salut, {{ 'Tête de bite' }} !</h1>
       <p>Petit calcul : 1 + 2 = {{ 1 + 2 }}</p>
+      
+      <p>{{ graphs.length }} graphes trouvés :</p>
+      <ul>
+        <li ng-repeat="graph in graphs">
+          {{ graph.title }}
+        </li>
+      </ul>
+      
     </div>
       
     <script src="/static/jquery/dist/jquery.js"></script>
