@@ -1,0 +1,14 @@
+{
+  "name": "tests-angularjs",
+  "version": "0.0.1",
+  "authors": [
+    "Pierre Gentile <pierre.gentile.perso@gmail.com>"
+  ],
+  "description": "Tests d'AngularJS",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "^1.2.19",
+    "bootstrap": "^3.2.0"
+  }
+}
