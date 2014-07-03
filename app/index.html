@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr" ng-app="dashboardApp">
   <head>
-    <title>Bootstrap 101 Template</title>
+    <title ng-bind="'Yihaaaaaaaaaaaa, Angular !'">Titre à remplir</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="/static/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <link href="/static/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet">
+    <script src="/static/jquery/dist/jquery.js"></script>
     <script src="/static/angular/angular.js"></script>
     <script src="/js/controllers.js"></script>
   </head>
@@ -16,16 +17,51 @@
       <h1>Salut, {{ 'Tête de bite' }} !</h1>
       <p>Petit calcul : 1 + 2 = {{ 1 + 2 }}</p>
       
+      <hr>
+      
+      <p>
+        <form class="form-inline" role="form">
+          <div class="form-group">
+              <label class="sr-only" for="graph-name">Nom</label>
+              <input type="text" class="form-control" id="graph-name" placeholder="Graphe" ng-model="name">
+          </div>
+          <div class="form-group">
+              <label class="sr-only" for="repliquat-name">Répliquat</label>
+              <input type="text" class="form-control" id="repliquat-name" ng-model="name">
+          </div>
+          <button class="btn btn-default" ng-click="alert(name)">OK</button>
+        </form>
+      </p>
+      
+      <p><b>Nom :</b> {{ name }}</p>
+      
+      <hr>
+      
       <p>{{ graphs.length }} graphes trouvés :</p>
       <ul>
         <li ng-repeat="graph in graphs">
-          {{ graph.title }}
+          <a href="#/graph/{{ graph.id }}">{{ graph.title | upper }}</a>
         </li>
       </ul>
       
+      <hr>
+      
+      <div ng-controller="EventWatcherController">
+        <div ng-controller="EventController">
+        
+          <p><button class="btn btn-default" ng-click="add()">Ajouter un événement</button><p>
+      
+          <ul>
+            <li ng-repeat="event in events">{{ event }}</li>
+          </ul>
+        
+        </div>
+        
+        <p>{{ eventsAddedCount }} événement(s) ajouté(s)</p>
+      </div>
+      
     </div>
       
-    <script src="/static/jquery/dist/jquery.js"></script>
     <script src="/static/bootstrap/dist/js/bootstrap.js"></script>
   </body>
 </html>
