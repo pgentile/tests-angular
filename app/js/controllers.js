@@ -55,4 +55,14 @@ var dashboardApp = angular.module('dashboardApp', [])
         $scope.$emit('eventRemoved');
       }
     };
+  })
+  .directive('myAddClass', function ($timeout) {
+    return {
+      restrict: 'A',
+      link: function (scope, element, attrs) {
+        $timeout(function () {
+          element.addClass("added");
+        }, 1);
+      }
+    }
   });

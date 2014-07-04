@@ -10,6 +10,17 @@
     <script src="/static/jquery/dist/jquery.js"></script>
     <script src="/static/angular/angular.js"></script>
     <script src="/js/controllers.js"></script>
+    <style>
+    
+    ul#events li {
+      transition: color 1s;
+    }
+    
+    ul#events li.added {
+      color: red;
+    }
+    
+    </style>
   </head>
   <body ng-controller="GraphController">
     <div class="container-fluid">
@@ -52,8 +63,8 @@
           <p><button class="btn btn-default" ng-click="add()">Ajouter un événement</button><p>
           <p><button class="btn btn-default" ng-click="remove()">Supprimer un événement</button><p>
       
-          <ul ng-if="events.length > 0">
-            <li ng-repeat="event in events">{{ event }}</li>
+          <ul ng-if="events.length > 0" id="events">
+            <li ng-repeat="event in events" my-add-class="added">{{ event }}</li>
           </ul>
         
         </div>
