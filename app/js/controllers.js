@@ -34,7 +34,10 @@ var dashboardApp = angular.module('dashboardApp', [])
     $scope.eventsAddedCount = 0;
     
     $scope.$on('newEventAdded', function () {
-      $scope.eventsAddedCount += 1;
+      $scope.eventsAddedCount++;
+    });
+    $scope.$on('eventRemoved', function () {
+      $scope.eventsAddedCount--;
     });
   })
   .controller('EventController', function ($scope) {
@@ -44,6 +47,12 @@ var dashboardApp = angular.module('dashboardApp', [])
       var num = $scope.events.length + 1;
       $scope.events.push('Event #' + num);
       
-      $scope.$emit('newEventAdded');
+      $scope.$emit('newEventAdded'); // Envoi vers le contrôleur parent
+    };
+    
+    $scope.remove = function () {
+      if ($scope.events.pop() !== undefined) {
+        $scope.$emit('eventRemoved');
+      }
     };
   });

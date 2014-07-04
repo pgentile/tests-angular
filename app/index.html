@@ -40,7 +40,7 @@
       <p>{{ graphs.length }} graphes trouvés :</p>
       <ul>
         <li ng-repeat="graph in graphs">
-          <a href="#/graph/{{ graph.id }}">{{ graph.title | upper }}</a>
+          <a ng-href="#/graph/{{ graph.id }}">{{ graph.title | upper }}</a>
         </li>
       </ul>
       
@@ -50,8 +50,9 @@
         <div ng-controller="EventController">
         
           <p><button class="btn btn-default" ng-click="add()">Ajouter un événement</button><p>
+          <p><button class="btn btn-default" ng-click="remove()">Supprimer un événement</button><p>
       
-          <ul>
+          <ul ng-if="events.length > 0">
             <li ng-repeat="event in events">{{ event }}</li>
           </ul>
         
