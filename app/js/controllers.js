@@ -1,6 +1,6 @@
 'use strict';
 
-var dashboardApp = angular.module('dashboardApp', [])
+var dashboardApp = angular.module('dashboardApp', ['ngAnimate'])
   .factory('alerting', function () {
     return window.alert;
   })

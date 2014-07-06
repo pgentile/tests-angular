@@ -9,6 +9,7 @@
     <link href="/static/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet">
     <script src="/static/jquery/dist/jquery.js"></script>
     <script src="/static/angular/angular.js"></script>
+    <script src="/static/angular-animate/angular-animate.js"></script>
     <script src="/js/controllers.js"></script>
     <style>
     
@@ -17,11 +18,13 @@
       -webkit-column-count: 3;
     }
     
-    ul#events li {
+    ul#events li.ng-enter {
       transition: color 1s;
+      color: black;
     }
     
-    ul#events li.added {
+    ul#events li,
+    ul#events li.ng-enter.ng-enter-active {
       color: red;
     }
     
@@ -69,7 +72,7 @@
           <p><button class="btn btn-default" ng-click="remove()">Supprimer un événement</button><p>
       
           <ul ng-if="events.length > 0" id="events">
-            <li ng-repeat="event in events" my-add-class="added">{{ event }}</li>
+            <li ng-repeat="event in events">{{ event }}</li>
           </ul>
         
         </div>
