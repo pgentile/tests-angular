@@ -12,6 +12,11 @@
     <script src="/js/controllers.js"></script>
     <style>
     
+    ul#events {
+      column-count: 3;
+      -webkit-column-count: 3;
+    }
+    
     ul#events li {
       transition: color 1s;
     }
@@ -23,7 +28,7 @@
     </style>
   </head>
   <body ng-controller="GraphController">
-    <div class="container-fluid">
+    <div class="container-fluid" ng-cloak>
       
       <h1>Salut, {{ 'Tête de bite' }} !</h1>
       <p>Petit calcul : 1 + 2 = {{ 1 + 2 }}</p>
