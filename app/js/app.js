@@ -1,6 +1,7 @@
 'use strict';
 
-var dashboardApp = angular.module('dashboardApp', ['ngAnimate'])
+
+angular.module('dashboard', ['ngAnimate', 'navbar'])
   .factory('alerting', function () {
     return window.alert;
   })
@@ -66,3 +67,4 @@ var dashboardApp = angular.module('dashboardApp', ['ngAnimate'])
       }
     }
   });
+
