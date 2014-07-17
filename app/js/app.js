@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('dashboard', ['ngAnimate', 'navbar'])
+angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs'])
   .factory('alerting', function () {
     return window.alert;
   })
