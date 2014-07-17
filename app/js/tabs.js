@@ -31,7 +31,7 @@ angular.module('tabs', [])
         $scope.selectTab = this.selectTab;
       },
       transclude: true,
-      template: '<ul class="nav nav-pills"><li ng-repeat="tab in tabs" ng-class="{ active: tab.active }"><a href="" ng-click="selectTab($index)">{{ tab.title }}</a></li></ul><div class="tab-content" ng-transclude></div>'
+      templateUrl: '/templates/tabs.html'
     };
   })
   .directive('tab', function () {
@@ -42,7 +42,7 @@ angular.module('tabs', [])
         active: '='
       },
       transclude: true,
-      template: '<div class="tab-pane" ng-transclude ng-show="isActive()"></div>',
+      templateUrl: '/templates/tab-pane.html',
       link: function (scope, element, attrs, tabsController) {
         console.info("Link 'tab'", element);
         

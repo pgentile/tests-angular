@@ -8,6 +8,6 @@ angular.module('navbar', [])
       scope: {
         title: '=title'
       },
-      templateUrl: 'templates/navbar.html'
+      templateUrl: '/templates/navbar.html'
     };
   });
