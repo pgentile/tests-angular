@@ -39,8 +39,8 @@
     <div class="container-fluid" ng-cloak>
       
       <tabs>
-        <tab ng-repeat="truc in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" title="{{ truc }}" active="">
-          <p>Contenu : {{ truc }} biffle</p>
+        <tab ng-repeat="truc in trucs" title="Tab {{ truc }}" active="$index == 0">
+          <p>Contenu : {{ truc }} biffle.</p>
         </tab>
       </tabs>
       

@@ -11,6 +11,8 @@ angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs'])
     }
   })
   .controller('GraphController', function ($scope, alerting) {
+    $scope.trucs = [1, 2, 3];
+    
     $scope.graphs = [
       {
         id: 4,
