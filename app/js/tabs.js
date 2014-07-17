@@ -5,9 +5,8 @@ angular.module('tabs', [])
   .directive('tabs', function () {
     return {
       restrict: 'E',
+      scope: true,
       controller: function ($scope) {
-        console.info("Controller 'tabs'");
-        
         $scope.tabs = [];
         
         this.addTab = function (title, active) {
@@ -20,8 +19,6 @@ angular.module('tabs', [])
         }
         
         this.selectTab = function (index) {
-          console.info("Selected tab :", index);
-        
           $scope.tabs.forEach(function (tab) {
             tab.active = false;
           });
@@ -44,11 +41,8 @@ angular.module('tabs', [])
       transclude: true,
       templateUrl: '/templates/tab-pane.html',
       link: function (scope, element, attrs, tabsController) {
-        console.info("Link 'tab'", element);
-        
         var tab = tabsController.addTab(attrs.title, scope.active);
         scope.isActive = function() {
-          console.log("Active ?", tab.active);
           return tab.active;
         }
       }
