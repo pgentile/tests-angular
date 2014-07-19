@@ -6,7 +6,7 @@ angular.module('navbar', [])
     return {
       restrict: 'E',
       scope: {
-        title: '=title'
+        title: '@'
       },
       templateUrl: '/templates/navbar.html'
     };
