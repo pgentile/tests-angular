@@ -2,6 +2,9 @@
 
 
 angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs'])
+  .config(function ($logProvider) {
+    $logProvider.debugEnabled(true);
+  })
   .factory('alerting', function () {
     return window.alert;
   })
@@ -12,8 +15,12 @@ angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs'])
   })
   .controller('TrucsController', function ($scope) {
     $scope.trucs = [1, 2, 3];
+    
+    $scope.addTruc = function () {
+      $scope.trucs.push($scope.trucs.length + 1);
+    }
   })
-  .controller('GraphController', function ($scope, alerting) {    
+  .controller('GraphController', function ($scope, alerting) {
     $scope.graphs = [
       {
         id: 4,
@@ -70,12 +77,13 @@ angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs'])
       }
     }
   })
-  .directive('debugScope', function () {
+  .directive('debugScope', function ($log) {
     return {
       restrict: 'E',
       scope: true,
       link: function (scope, element, attrs) {
-        console.info("debug-scope", scope);
+        $log.debug("debug-scope : scope =", scope);
+        $log.debug("debug-scope : element =", element);
         
         scope.scopeIds = [];
         
@@ -86,7 +94,7 @@ angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs'])
         }
         
       },
-      template: '<div><p><b>DEBUG SCOPE</b></p><p>Hiérarchie = {{ scopeIds }}</p></div>'
+      template: '<div><p><b>DEBUG SCOPE</b></p><p>Hiérarchie = <code>{{ scopeIds }}</code></p></div>'
     };
   });
 

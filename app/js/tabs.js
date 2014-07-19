@@ -5,8 +5,8 @@ angular.module('tabs', [])
   .directive('tabs', function () {
     return {
       restrict: 'E',
-      scope: {},
-      controller: function ($scope) {
+      scope: true,
+      controller: function ($scope, $log) {
         $scope.tabs = [];
         
         this.addTab = function (title, active, disabled) {
@@ -19,11 +19,12 @@ angular.module('tabs', [])
           return tab;
         }
         
-        this.selectTab = function (index) {
-          $scope.tabs.forEach(function (tab) {
-            tab.active = false;
-          });
-          $scope.tabs[index].active = true;
+        this.selectTab = function (selectedIndex) {
+          if (!$scope.tabs[selectedIndex].disabled) {
+            $scope.tabs.forEach(function (tab, index) {
+              tab.active = (index === selectedIndex);
+            });
+          }
         }
         
         $scope.selectTab = this.selectTab;

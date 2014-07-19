@@ -45,11 +45,12 @@
       
       <div ng-controller="TrucsController">
         <tabs>
-          <tab ng-repeat="truc in trucs" title="Tab {{ truc }}" active="$index == 0" disabled="$index == 2">
-            <p>Contenu : {{ truc }} biffle.</p>
+          <tab ng-repeat="truc in trucs" title="Tab {{ truc }}" active="$index === 0" disabled="$index === 2">
+            <p>Contenu : truc n°{{ truc }}.</p>
             <debug-scope></debug-scope>
           </tab>
         </tabs>
+        <p><button class="btn btn-default" ng-click="addTruc()">Ajouter un truc</button></p>
       </div>
       
       <hr>
