@@ -30,6 +30,10 @@
       background-color: inherit;
     }
     
+    .nav-pills {
+      margin-bottom: 10px;
+    }
+    
     </style>
   </head>
   <body ng-controller="GraphController">
@@ -39,7 +43,7 @@
     <div class="container-fluid" ng-cloak>
       
       <tabs>
-        <tab ng-repeat="truc in trucs" title="Tab {{ truc }}" active="$index == 0">
+        <tab ng-repeat="truc in trucs" title="Tab {{ truc }}" active="$index == 0" disabled="$index == 2">
           <p>Contenu : {{ truc }} biffle.</p>
         </tab>
       </tabs>

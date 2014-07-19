@@ -1,5 +1,5 @@
 <ul class="nav nav-pills">
-  <li ng-repeat="tab in tabs" ng-class="{ active: tab.active }">
+  <li ng-repeat="tab in tabs" ng-class="{ active: tab.active, disabled: tab.disabled }">
     <a href="" ng-click="selectTab($index)">{{ tab.title }}</a>
   </li>
 </ul>

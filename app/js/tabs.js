@@ -9,10 +9,11 @@ angular.module('tabs', [])
       controller: function ($scope) {
         $scope.tabs = [];
         
-        this.addTab = function (title, active) {
+        this.addTab = function (title, active, disabled) {
           var tab = {
             title: title,
             active: active,
+            disabled: disabled,
           };
           $scope.tabs.push(tab);
           return tab;
@@ -36,12 +37,13 @@ angular.module('tabs', [])
       restrict: 'E',
       require:'^tabs',
       scope: {
-        active: '='
+        active: '=',
+        disabled: '='
       },
       transclude: true,
       templateUrl: '/templates/tab-pane.html',
       link: function (scope, element, attrs, tabsController) {
-        var tab = tabsController.addTab(attrs.title, scope.active);
+        var tab = tabsController.addTab(attrs.title, scope.active, scope.disabled);
         scope.isActive = function() {
           return tab.active;
         }
