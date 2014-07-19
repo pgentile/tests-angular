@@ -3,7 +3,7 @@
 
 angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs'])
   .config(function ($logProvider) {
-    $logProvider.debugEnabled(true);
+    $logProvider.debugEnabled(false);
   })
   .factory('alerting', function () {
     return window.alert;
@@ -14,10 +14,20 @@ angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs'])
     }
   })
   .controller('TrucsController', function ($scope) {
-    $scope.trucs = [1, 2, 3];
+    $scope.trucs = [];
+    for (var i = 0; i < 7; i++) {
+      $scope.trucs.push({
+        num: i + 1,
+        disabled: i % 2 === 1
+      });
+    }
     
     $scope.addTruc = function () {
-      $scope.trucs.push($scope.trucs.length + 1);
+      $scope.trucs.push({
+        num: $scope.trucs.length + 1,
+        active: false,
+        disabled: false
+      });
     }
   })
   .controller('GraphController', function ($scope, alerting) {

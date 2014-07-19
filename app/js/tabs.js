@@ -8,26 +8,24 @@ angular.module('tabs', [])
       scope: true,
       controller: function ($scope, $log) {
         $scope.tabs = [];
+        $scope.activeTab = null;
         
-        this.addTab = function (title, active, disabled) {
-          var tab = {
-            title: title,
-            active: active,
-            disabled: disabled,
-          };
+        this.addTab = function (tab) {
           $scope.tabs.push(tab);
-          return tab;
         }
         
-        this.selectTab = function (selectedIndex) {
-          if (!$scope.tabs[selectedIndex].disabled) {
-            $scope.tabs.forEach(function (tab, index) {
-              tab.active = (index === selectedIndex);
-            });
+        this.selectTab = function (selectedTab) {
+          if (!selectedTab.disabled) {
+            $scope.activeTab = selectedTab;
           }
         }
         
+        this.isTabActive = function(tab) {
+          return tab === $scope.activeTab;
+        }
+        
         $scope.selectTab = this.selectTab;
+        $scope.isTabActive = this.isTabActive;
       },
       transclude: true,
       templateUrl: '/templates/tabs.html'
@@ -38,15 +36,25 @@ angular.module('tabs', [])
       restrict: 'E',
       require:'^tabs',
       scope: {
+        title: '@',
         active: '=',
         disabled: '='
       },
       transclude: true,
       templateUrl: '/templates/tab-pane.html',
       link: function (scope, element, attrs, tabsController) {
-        var tab = tabsController.addTab(attrs.title, scope.active, scope.disabled);
+        var tab = {
+          title: scope.title,
+          disabled: scope.disabled
+        }
+        tabsController.addTab(tab);
+        
         scope.isActive = function() {
-          return tab.active;
+          return tabsController.isTabActive(tab);
+        }
+        
+        if (scope.active) {
+          tabsController.selectTab(tab);
         }
       }
     };
