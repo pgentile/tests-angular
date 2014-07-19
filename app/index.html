@@ -36,17 +36,19 @@
     
     </style>
   </head>
-  <body ng-controller="GraphController">
+  <body>
     
     <tt-navbar title="'This is me'"></tt-navbar>
 
     <div class="container-fluid" ng-cloak>
       
-      <tabs>
-        <tab ng-repeat="truc in trucs" title="Tab {{ truc }}" active="$index == 0" disabled="$index == 2">
-          <p>Contenu : {{ truc }} biffle.</p>
-        </tab>
-      </tabs>
+      <div ng-controller="TrucsController">
+        <tabs>
+          <tab ng-repeat="truc in trucs" title="Tab {{ truc }}" active="$index == 0" disabled="$index == 2">
+            <p>Contenu : {{ truc }} biffle.</p>
+          </tab>
+        </tabs>
+      </div>
       
       <hr>
       
@@ -73,12 +75,14 @@
       
       <hr>
       
-      <p>{{ graphs.length }} graphes trouvés :</p>
-      <ul>
-        <li ng-repeat="graph in graphs">
-          <a ng-href="#/graph/{{ graph.id }}">{{ graph.title | upper }}</a>
-        </li>
-      </ul>
+      <div ng-controller="GraphController">
+        <p>{{ graphs.length }} graphes trouvés :</p>
+        <ul>
+          <li ng-repeat="graph in graphs">
+            <a ng-href="#/graph/{{ graph.id }}">{{ graph.title | upper }}</a>
+          </li>
+        </ul>
+      </div>
       
       <hr>
       

@@ -10,9 +10,11 @@ angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs'])
       return value.toUpperCase();
     }
   })
-  .controller('GraphController', function ($scope, alerting) {
+  .controller('TrucsController', function ($scope) {
+    console.info("Controller Trucs");
     $scope.trucs = [1, 2, 3];
-    
+  })
+  .controller('GraphController', function ($scope, alerting) {    
     $scope.graphs = [
       {
         id: 4,
