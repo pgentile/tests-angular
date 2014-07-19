@@ -47,6 +47,7 @@
         <tabs>
           <tab ng-repeat="truc in trucs" title="Tab {{ truc }}" active="$index == 0" disabled="$index == 2">
             <p>Contenu : {{ truc }} biffle.</p>
+            <debug-scope></debug-scope>
           </tab>
         </tabs>
       </div>
@@ -83,6 +84,7 @@
             <a ng-href="#/graph/{{ graph.id }}">{{ graph.title | upper }}</a>
           </li>
         </ul>
+        
       </div>
       
       <hr>
@@ -96,7 +98,7 @@
           <ul id="events">
             <li ng-repeat="event in events">{{ event }}</li>
           </ul>
-        
+          
         </div>
         
         <p>{{ eventsAddedCount }} événement(s) ajouté(s)</p>

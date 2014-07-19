@@ -11,7 +11,6 @@ angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs'])
     }
   })
   .controller('TrucsController', function ($scope) {
-    console.info("Controller Trucs");
     $scope.trucs = [1, 2, 3];
   })
   .controller('GraphController', function ($scope, alerting) {    
@@ -70,5 +69,24 @@ angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs'])
         }, 1);
       }
     }
+  })
+  .directive('debugScope', function () {
+    return {
+      restrict: 'E',
+      scope: true,
+      link: function (scope, element, attrs) {
+        console.info("debug-scope", scope);
+        
+        scope.scopeIds = [];
+        
+        var currentScope = scope.$parent;
+        while (currentScope !== null) {
+          scope.scopeIds.push(currentScope.$id);
+          currentScope = currentScope.$parent;
+        }
+        
+      },
+      template: '<div><p><b>DEBUG SCOPE</b></p><p>Hiérarchie = {{ scopeIds }}</p></div>'
+    };
   });
 

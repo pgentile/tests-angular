@@ -5,7 +5,7 @@ angular.module('tabs', [])
   .directive('tabs', function () {
     return {
       restrict: 'E',
-      scope: true,
+      scope: {},
       controller: function ($scope) {
         $scope.tabs = [];
         
