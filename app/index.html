@@ -11,9 +11,11 @@
     <script src="/static/angular/angular.js"></script>
     <script src="/static/angular-animate/angular-animate.js"></script>
     <script src="/static/angular-route/angular-route.js"></script>
+    <script src="/static/d3/d3.js"></script>
     <script src="/js/navbar.js"></script>
     <script src="/js/tabs.js"></script>
     <script src="/js/app.js"></script>
+    <script src="/js/d3.js"></script>
     <style>
     
     ul#events {
@@ -47,7 +49,6 @@
         <tabs>
           <tab ng-repeat="truc in trucs" title="Tab {{ truc.num }}" active="$index === 0">
             <p>Contenu : truc n°{{ truc.num }}.</p>
-            <debug-scope></debug-scope>
           </tab>
         </tabs>
         <p><button class="btn btn-default" ng-click="addTruc()">Ajouter un truc</button></p>
@@ -85,7 +86,6 @@
             <a ng-href="#/graph/{{ graph.id }}">{{ graph.title | upper }}</a>
           </li>
         </ul>
-        
       </div>
       
       <hr>
@@ -103,6 +103,13 @@
         </div>
         
         <p>{{ eventsAddedCount }} événement(s) ajouté(s)</p>
+      </div>
+      
+      <hr>
+      
+      <div ng-controller="D3Controller">
+        <p><button class="btn btn-default" ng-click="addNumber()">Ajouter un nombre</button><p>
+        <d3 data="data" update="updateMe"></d3>
       </div>
       
     </div>

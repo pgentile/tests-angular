@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs'])
+angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs', 'd3'])
   .config(function ($logProvider) {
     $logProvider.debugEnabled(false);
   })
@@ -106,5 +106,29 @@ angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs'])
       },
       template: '<div><p><b>DEBUG SCOPE</b></p><p>Hiérarchie = <code>{{ scopeIds }}</code></p></div>'
     };
+  })
+  .controller('D3Controller', function ($scope, $log) {
+    $scope.data = [1, 2, 3, 4, 5];
+    
+    $scope.updateMe = function (element, data) {
+      var paragraphs = d3.select(element)
+        .selectAll('p')
+        .data(data);
+
+      paragraphs.enter()
+          .append('p')
+          .text(function (d) { return d; });
+
+      paragraphs.text(function (d) { return d; });
+        
+      paragraphs.exit()
+        .remove();
+    }
+    
+    $scope.addNumber = function () {
+      $log.info("Ajouter un nombre");
+      $scope.data.push($scope.data.length + 1);
+    }
   });
+  
 
