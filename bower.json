@@ -12,6 +12,7 @@
     "angular-animate": "^1.2.19",
     "angular-route": "^1.2.19",
     "d3": "^3.4.11",
+    "flot": "^0.8.3",
     "bootstrap": "^3.2.0",
     "class.js": "^1.0.0"
   }

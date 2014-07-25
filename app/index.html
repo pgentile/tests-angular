@@ -11,6 +11,7 @@
     <script src="/static/angular/angular.js"></script>
     <script src="/static/angular-animate/angular-animate.js"></script>
     <script src="/static/angular-route/angular-route.js"></script>
+    <script src="/static/flot/jquery.flot.js"></script>
     <script src="/static/d3/d3.js"></script>
     <script src="/js/navbar.js"></script>
     <script src="/js/tabs.js"></script>
@@ -111,6 +112,25 @@
         <p><button class="btn btn-default" ng-click="addNumber()">Ajouter un nombre</button><p>
         <d3 data="data" update="updateMe"></d3>
       </div>
+      
+      <hr>
+      
+      <div id="plot" style="height: 250px;">
+        
+        <script>
+        
+        $(function() {
+          var serie = [];
+          for (var i = 0; i < 100; i += 0.5) {
+            serie.push([i, Math.sin(i) * 100]);
+          }
+
+          var series = [serie];
+
+          $.plot($("#plot"), series);
+        });
+        
+        </script>
       
     </div>
       
