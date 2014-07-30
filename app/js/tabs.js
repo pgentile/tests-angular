@@ -5,7 +5,8 @@ angular.module('tabs', [])
   .directive('tabs', function () {
     return {
       restrict: 'E',
-      scope: true,
+      scope: {},
+      controllerAs: 'ctrl',
       controller: function ($scope, $log) {
         $scope.tabs = [];
         $scope.activeTab = null;
@@ -23,9 +24,6 @@ angular.module('tabs', [])
         this.isTabActive = function(tab) {
           return tab === $scope.activeTab;
         }
-        
-        $scope.selectTab = this.selectTab;
-        $scope.isTabActive = this.isTabActive;
       },
       transclude: true,
       templateUrl: '/templates/tabs.html'
