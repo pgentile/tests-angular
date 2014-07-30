@@ -47,7 +47,7 @@
       
       <div ng-controller="TrucsController">
         <tabs>
-          <tab ng-repeat="truc in trucs" title="Tab {{ truc.num }}" active="$index === 0">
+          <tab ng-repeat="truc in trucs" title="Tab {{ truc.num }}" active="$index === 0" disabled="truc.disabled">
             <p>Contenu : truc n°{{ truc.num }}.</p>
           </tab>
         </tabs>
@@ -56,7 +56,7 @@
       
       <hr>
       
-      <h1>Salut, {{ 'Tête de bite' }} !</h1>
+      <h1>Salut, {{ 'Mon pote' }} !</h1>
       <p>Petit calcul : 1 + 2 = {{ 1 + 2 }}</p>
       
       <hr>
