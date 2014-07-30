@@ -113,25 +113,6 @@
         <d3 data="data" update="updateMe"></d3>
       </div>
       
-      <hr>
-      
-      <div id="plot" style="height: 250px;">
-        
-        <script>
-        
-        $(function() {
-          var serie = [];
-          for (var i = 0; i < 100; i += 0.5) {
-            serie.push([i, Math.sin(i) * 100]);
-          }
-
-          var series = [serie];
-
-          $.plot($("#plot"), series);
-        });
-        
-        </script>
-      
     </div>
       
     <script src="/static/bootstrap/dist/js/bootstrap.js"></script>

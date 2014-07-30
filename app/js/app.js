@@ -107,8 +107,14 @@ angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs', 'd3'])
       template: '<div><p><b>DEBUG SCOPE</b></p><p>Hiérarchie = <code>{{ scopeIds }}</code></p></div>'
     };
   })
-  .controller('D3Controller', function ($scope, $log) {
-    $scope.data = [1, 2, 3, 4, 5];
+  .controller('D3Controller', function ($scope, $log, $http) {
+    $scope.data = [];
+    
+    $http.get('/r/d3data.json')
+      .success(function (data, status, headers, config) {
+        $log.info("Données récupérées");
+        $scope.data = angular.fromJson(data);
+      });
     
     $scope.updateMe = function (element, data) {
       var paragraphs = d3.select(element)
