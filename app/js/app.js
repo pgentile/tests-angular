@@ -5,8 +5,8 @@ angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs', 'd3'])
   .config(function ($logProvider) {
     $logProvider.debugEnabled(false);
   })
-  .factory('alerting', function () {
-    return window.alert;
+  .factory('alerting', function ($window) {
+    return $window.alert;
   })
   .filter('upper', function () {
     return function (value) {
