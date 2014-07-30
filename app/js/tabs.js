@@ -13,17 +13,17 @@ angular.module('tabs', [])
         
         this.addTab = function (tab) {
           $scope.tabs.push(tab);
-        }
+        };
         
         this.selectTab = function (selectedTab) {
           if (!selectedTab.disabled) {
             $scope.activeTab = selectedTab;
           }
-        }
+        };
         
         this.isTabActive = function(tab) {
           return tab === $scope.activeTab;
-        }
+        };
       },
       transclude: true,
       templateUrl: '/templates/tabs.html'
@@ -44,12 +44,12 @@ angular.module('tabs', [])
         var tab = {
           title: scope.title,
           disabled: scope.disabled
-        }
+        };
         tabsController.addTab(tab);
         
         scope.isActive = function() {
           return tabsController.isTabActive(tab);
-        }
+        };
         
         if (scope.active) {
           tabsController.selectTab(tab);
