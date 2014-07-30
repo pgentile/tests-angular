@@ -30,7 +30,14 @@ angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs', 'd3'])
       });
     }
   })
-  .controller('GraphController', function ($scope, alerting) {
+  .controller('SalutController', function ($scope, alerting) {
+    $scope.name = '';
+    
+    $scope.alert = function (name) {
+      alerting('Salut, ' + name + ' !');
+    };
+  })
+  .controller('GraphController', function ($scope) {
     $scope.graphs = [
       {
         id: 4,
@@ -45,11 +52,6 @@ angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs', 'd3'])
         title: 'Disques'
       }
     ];
-  
-    $scope.alert = function (name) {
-      alerting('Nom actuel : ' + name);
-    };
-  
   })
   .controller('EventWatcherController', function ($scope) {
     $scope.eventsAddedCount = 0;
