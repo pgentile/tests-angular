@@ -41,7 +41,12 @@
   </head>
   <body>
     
-    <tt-navbar title="This is me, {{ 6 + 5 }}"></tt-navbar>
+    <navbar title="This is me, {{ 6 + 5 }}">
+      <navbar-list>
+        <navbar-link url="#link1">Lien 1</navbar-link>
+        <navbar-link url="#link2" active="true">Lien 2</navbar-link>
+      </navbar-list>
+    </navbar>
 
     <div class="container-fluid" ng-cloak>
       
