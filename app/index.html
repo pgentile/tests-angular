@@ -41,13 +41,17 @@
   </head>
   <body>
     
-    <navbar title="This is me, {{ 6 + 5 }}">
-      <navbar-list>
-        <navbar-link url="#link1">Lien 1</navbar-link>
-        <navbar-link url="#link2" active="true">Lien 2</navbar-link>
-      </navbar-list>
-    </navbar>
-
+    <div ng-controller="NavbarController">
+      <navbar title="This is me, {{ 6 + 5 }}">
+        <navbar-list>
+          <navbar-link ng-repeat="link in links" url="{{ link.url }}" active="link.active">XX {{ $index }} // {{ link.name }}</navbar-link>
+        </navbar-list>
+      </navbar>
+      
+      <p><button class="btn btn-default" ng-click="addLink()">Ajouter un lien</button></p>
+      
+    </div>
+    
     <div class="container-fluid" ng-cloak>
       
       <div ng-controller="TrucsController">

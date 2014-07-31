@@ -17,10 +17,10 @@ angular.module('navbar', [])
       restrict: 'E',
       scope: {},
       transclude: true,
-      template: '<ul class="nav navbar-nav" ng-transclude></ul>'
+      template: '<ul class="nav navbar-nav" ng-transclude></ul>',
     };
   })
-  .directive('navbarLink', function ($compile) {
+  .directive('navbarLink', function ($compile, $log) {
     return {
       restrict: 'E',
       scope: {
@@ -28,14 +28,15 @@ angular.module('navbar', [])
         active: '='
       },
       transclude: true,
-      link: function (scope, element, attrs, controller, transclude) {
-        // On fait sauter l'élément transclus en compilant
-        var item = $compile(
-          '<li ng-class="{ active: active }"><a href="{{ url }}" ng-transclude></a></li>',
-          transclude
-        );
-        item(scope, function (clonedElement, innerScope) {
-          element.replaceWith(clonedElement);
+      link: function (scope, element, attrs, ctrl, transclude) {
+        var template = $compile('<li ng-class="{ active: active }"><a href="{{ url }}"></a></li>');
+        template(scope, function (templateClone) {
+          element.append(templateClone);
+          
+          transclude(function (transcludeClone) {
+            element.find('li > a').append(transcludeClone);
+            element.replaceWith(element.find('li'));
+          });
         });
       }
     };

@@ -137,6 +137,33 @@ angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs', 'd3'])
       $log.info("Ajouter un nombre");
       $scope.data.push($scope.data.length + 1);
     }
+  })
+  .controller('NavbarController', function ($scope) {
+    $scope.links = [
+      {
+        name: 'Link 1',
+        url: '#link1',
+        active: false
+      },
+      {
+        name: 'Link 2',
+        url: '#link2',
+        active: true
+      },
+      {
+        name: 'Link 3',
+        url: '#link3',
+        active: false
+      }
+    ];
+    
+    $scope.addLink = function () {
+      $scope.links.push({
+        name: 'NEW LINK',
+        url: '#new-link',
+        active: false
+      });
+    };
   });
   
 
