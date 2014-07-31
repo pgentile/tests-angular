@@ -15,7 +15,6 @@ angular.module('navbar', [])
   .directive('navbarList', function () {
     return {
       restrict: 'E',
-      scope: {},
       transclude: true,
       template: '<ul class="nav navbar-nav" ng-transclude></ul>',
     };
@@ -28,16 +27,9 @@ angular.module('navbar', [])
         active: '='
       },
       transclude: true,
+      template: '<li ng-class="{ active: active }"><a href="{{ url }}" ng-transclude></a></li>',
       link: function (scope, element, attrs, ctrl, transclude) {
-        var template = $compile('<li ng-class="{ active: active }"><a href="{{ url }}"></a></li>');
-        template(scope, function (templateClone) {
-          element.append(templateClone);
-          
-          transclude(function (transcludeClone) {
-            element.find('li > a').append(transcludeClone);
-            element.replaceWith(element.find('li'));
-          });
-        });
+        element.find("li").unwrap();
       }
     };
   });
