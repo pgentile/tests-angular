@@ -17,15 +17,43 @@ module.exports = function(grunt) {
       }
     },
     copy: {
-      main: {
-        files: [
-          {
-            expand: true,
-            cwd: './app',
-            src: '**',
-            dest: './dist',
-          }
-        ]
+      dist: {
+        files: [{
+          expand: true,
+          cwd: './app',
+          src: ['r/**'],
+          dest: './dist',
+        }]
+      }
+    },
+    htmlmin: {
+      options: {
+        collapseWhitespace: true,
+        conservativeCollapse: true,
+        collapseBooleanAttributes: true,
+        removeCommentsFromCDATA: true,
+        removeOptionalTags: true
+      },
+      dist: {
+        files: [{
+          expand: true,
+          cwd: './app',
+          src: ['**/*.html'],
+          dest: './dist'
+        }]
+      }
+    },
+    uglify: {
+      options: {
+        mangle: false
+      },
+      dist: {
+        files: [{
+          expand: true,
+          cwd: './app/js',
+          src: ['**.js'],
+          dest: './dist/js'
+        }]
       }
     },
     connect: {
@@ -49,11 +77,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   
-  grunt.registerTask('build', ['clean', 'copy'])
+  grunt.registerTask('dist', ['clean', 'copy', 'htmlmin', 'uglify'])
   
-  grunt.registerTask('serve', ['build', 'connect:server'])
+  grunt.registerTask('serve', ['dist', 'connect:server'])
   
-  grunt.registerTask('default', ['build']);
+  grunt.registerTask('default', ['dist']);
   
 };
