@@ -11,7 +11,7 @@ module.exports = function(grunt) {
       dist: './dist'
     },
     jshint: {
-      files: ['Gruntfile.js', 'app/js/**/*.js'],
+      files: ['Gruntfile.js', 'app/**/*.js'],
       options: {
         jshintrc: 'jshintrc.json'
       }
@@ -30,7 +30,7 @@ module.exports = function(grunt) {
       options: {
         collapseWhitespace: true,
         conservativeCollapse: true,
-        collapseBooleanAttributes: true,
+        collapseBooleanAttributes: false, // Provoque des bugs avec AngularJS
         removeCommentsFromCDATA: true,
         removeOptionalTags: true
       },
@@ -50,9 +50,9 @@ module.exports = function(grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: './app/js',
-          src: ['**.js'],
-          dest: './dist/js'
+          cwd: './app',
+          src: ['**/*.js'],
+          dest: './dist'
         }]
       }
     },
