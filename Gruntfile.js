@@ -7,7 +7,7 @@ module.exports = function(grunt) {
     jshint: {
       files: [
         'Gruntfile.js',
-        
+        'app/js/**/*.js',
       ],
       options: {
         node: true,
@@ -29,6 +29,10 @@ module.exports = function(grunt) {
         undef: true,
         trailing: true,
         smarttabs: true,
+        globals: {
+          angular: false,
+          d3: false
+        }
       }
     }
   });

@@ -7,7 +7,7 @@ angular.module('tabs', [])
       restrict: 'E',
       scope: {},
       controllerAs: 'ctrl',
-      controller: function ($scope, $log) {
+      controller: function ($scope) {
         $scope.tabs = [];
         $scope.activeTab = null;
         

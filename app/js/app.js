@@ -11,7 +11,7 @@ angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs', 'd3'])
   .filter('upper', function () {
     return function (value) {
       return value.toUpperCase();
-    }
+    };
   })
   .controller('TrucsController', function ($scope) {
     $scope.trucs = [];
@@ -28,7 +28,7 @@ angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs', 'd3'])
         active: false,
         disabled: false
       });
-    }
+    };
   })
   .controller('SalutController', function ($scope, alerting) {
     $scope.name = '';
@@ -82,20 +82,20 @@ angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs', 'd3'])
   .directive('myAddClass', function ($timeout) {
     return {
       restrict: 'A',
-      link: function (scope, element, attrs) {
+      link: function (scope, element) {
         $timeout(function () {
-          element.addClass("added");
+          element.addClass('added');
         }, 1);
       }
-    }
+    };
   })
   .directive('debugScope', function ($log) {
     return {
       restrict: 'E',
       scope: true,
-      link: function (scope, element, attrs) {
-        $log.debug("debug-scope : scope =", scope);
-        $log.debug("debug-scope : element =", element);
+      link: function (scope, element) {
+        $log.debug('debug-scope : scope =', scope);
+        $log.debug('debug-scope : element =', element);
         
         scope.scopeIds = [];
         
@@ -113,8 +113,8 @@ angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs', 'd3'])
     $scope.data = [];
     
     $http.get('/r/d3data.json')
-      .success(function (data, status, headers, config) {
-        $log.info("Données récupérées");
+      .success(function (data) {
+        $log.info('Données récupérées');
         $scope.data = angular.fromJson(data);
       });
     
@@ -131,12 +131,12 @@ angular.module('dashboard', ['ngAnimate', 'navbar', 'tabs', 'd3'])
         
       paragraphs.exit()
         .remove();
-    }
+    };
     
     $scope.addNumber = function () {
-      $log.info("Ajouter un nombre");
+      $log.info('Ajouter un nombre');
       $scope.data.push($scope.data.length + 1);
-    }
+    };
   })
   .controller('NavbarController', function ($scope) {
     $scope.links = [

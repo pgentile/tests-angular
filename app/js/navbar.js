@@ -19,7 +19,7 @@ angular.module('navbar', [])
       template: '<ul class="nav navbar-nav" ng-transclude></ul>',
     };
   })
-  .directive('navbarLink', function ($compile, $log) {
+  .directive('navbarLink', function () {
     return {
       restrict: 'E',
       scope: {
@@ -28,8 +28,8 @@ angular.module('navbar', [])
       },
       transclude: true,
       template: '<li ng-class="{ active: active }"><a href="{{ url }}" ng-transclude></a></li>',
-      link: function (scope, element, attrs, ctrl, transclude) {
-        element.find("li").unwrap();
+      link: function (scope, element) {
+        element.find('li').unwrap();
       }
     };
   });
