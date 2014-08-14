@@ -79,10 +79,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   
-  grunt.registerTask('dist', ['clean', 'copy', 'htmlmin', 'uglify'])
+  grunt.registerTask('validate', ['jshint']);
   
-  grunt.registerTask('serve', ['dist', 'connect:server'])
+  grunt.registerTask('dist', ['clean', 'copy', 'htmlmin', 'uglify']);
   
-  grunt.registerTask('default', ['dist']);
+  grunt.registerTask('serve', ['dist', 'connect:server']);
+  
+  grunt.registerTask('default', ['validate', 'dist']);
   
 };
