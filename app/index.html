@@ -10,6 +10,7 @@
     <script src="/static/jquery/dist/jquery.js"></script>
     <script src="/static/angular/angular.js"></script>
     <script src="/static/angular-animate/angular-animate.js"></script>
+    <script src="/static/angular-route/angular-route.js"></script>
     <script src="/static/flot/jquery.flot.js"></script>
     <script src="/static/d3/d3.js"></script>
     <script src="/js/tabs.js"></script>
@@ -56,7 +57,11 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Accueil</a></li>
+            <li class="active"><a href="#/home">Accueil</a></li>
+            <li><a href="#/trucs">Trucs</a></li>
+            <li><a href="#/graphs">Graphes</a></li>
+            <li><a href="#/events">Events</a></li>
+            <li><a href="#/d3">D3</a></li>
           </ul>
         </div>
 
@@ -65,76 +70,7 @@
     
     <div class="container-fluid" ng-cloak>
       
-      <div ng-controller="TrucsController">
-        <tabs>
-          <tab ng-repeat="truc in trucs" title="Tab {{ truc.num }}" active="$index === 0" disabled="truc.disabled">
-            <p>Contenu : truc n°{{ truc.num }}.</p>
-          </tab>
-        </tabs>
-        <p><button class="btn btn-default" ng-click="addTruc()">Ajouter un truc</button></p>
-      </div>
-      
-      <hr>
-      
-      <h1>Salut, {{ 'Mon pote' }} !</h1>
-      <p>Petit calcul : 1 + 2 = {{ 1 + 2 }}</p>
-      
-      <hr>
-      
-      <div ng-controller="SalutController">
-      
-        <p>
-          <form class="form-inline" role="form">
-            <div class="form-group">
-                <label class="sr-only" for="graph-name">Nom</label>
-                <input type="text" class="form-control" id="graph-name" placeholder="Nom" ng-model="name">
-            </div>
-            <div class="form-group">
-                <label class="sr-only" for="repliquat-name">Répliquat</label>
-                <input type="text" class="form-control" id="repliquat-name" ng-model="name">
-            </div>
-            <button class="btn btn-default" ng-click="alert(name)">OK</button>
-          </form>
-        </p>
-      
-        <p><b>Nom :</b> {{ name }}</p>
-
-      </div>
-      
-      <hr>
-      
-      <div ng-controller="GraphController">
-        <p>{{ graphs.length }} graphes trouvés :</p>
-        <ul>
-          <li ng-repeat="graph in graphs">
-            <a ng-href="#/graph/{{ graph.id }}">{{ graph.title | upper }}</a>
-          </li>
-        </ul>
-      </div>
-      
-      <hr>
-      
-      <div ng-controller="EventWatcherController">
-        <div ng-controller="EventController">
-        
-          <p><button class="btn btn-default" ng-click="add()">Ajouter un événement</button><p>
-          <p><button class="btn btn-default" ng-click="remove()">Supprimer un événement</button><p>
-      
-          <ul id="events">
-            <li ng-repeat="event in events">{{ event }}</li>
-          </ul>
-          
-        </div>
-        
-        <p>{{ eventsAddedCount }} événement(s) ajouté(s)</p>
-      </div>
-      
-      <hr>
-      
-      <div ng-controller="D3Controller">
-        <p><button class="btn btn-default" ng-click="addNumber()">Ajouter un nombre</button><p>
-        <d3 data="data" update="updateMe"></d3>
-      </div>
+      <div ng-view></div>
       
     </div>
       

@@ -1,0 +1,6 @@
+<tabs>
+  <tab ng-repeat="truc in trucs" title="Tab {{ truc.num }}" active="$index === 0" disabled="truc.disabled">
+    <p>Contenu : truc n°{{ truc.num }}.</p>
+  </tab>
+</tabs>
+<p><button class="btn btn-default" ng-click="addTruc()">Ajouter un truc</button></p>

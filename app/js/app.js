@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('dashboard', ['ngAnimate', 'tabs', 'd3'])
+angular.module('dashboard', ['ngAnimate', 'ngRoute', 'tabs', 'd3'])
   .config(function ($logProvider) {
     $logProvider.debugEnabled(false);
   })
@@ -12,6 +12,31 @@ angular.module('dashboard', ['ngAnimate', 'tabs', 'd3'])
     return function (value) {
       return value.toUpperCase();
     };
+  })
+  .config(function ($routeProvider) {
+    $routeProvider
+      .when('/home', {
+        templateUrl: 'pages/home.html'
+      })
+      .when('/trucs', {
+        templateUrl: 'pages/trucs.html',
+        controller: 'TrucsController'
+      })
+      .when('/graphs', {
+        templateUrl: 'pages/graphs.html',
+        controller: 'GraphController'
+      })
+      .when('/events', {
+        templateUrl: 'pages/events.html',
+        controller: 'EventWatcherController'
+      })
+      .when('/d3', {
+        templateUrl: 'pages/d3.html',
+        controller: 'D3Controller'
+      })
+      .otherwise({
+        redirectTo: '/home'
+      });
   })
   .controller('TrucsController', function ($scope) {
     $scope.trucs = [];

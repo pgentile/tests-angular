@@ -1,0 +1,12 @@
+<div ng-controller="EventController">
+
+  <p><button class="btn btn-default" ng-click="add()">Ajouter un événement</button><p>
+  <p><button class="btn btn-default" ng-click="remove()">Supprimer un événement</button><p>
+
+  <ul id="events">
+    <li ng-repeat="event in events">{{ event }}</li>
+  </ul>
+
+  <p>{{ eventsAddedCount }} événement(s) ajouté(s)</p>
+
+</div>
