@@ -97,10 +97,10 @@ module.exports = function(grunt) {
   
   grunt.registerTask('validate', ['jshint']);
   
-  grunt.registerTask('dist', ['clean', 'copy', 'htmlmin', 'uglify']);
+  grunt.registerTask('dist', ['clean', 'validate', 'copy', 'htmlmin', 'uglify']);
   
   grunt.registerTask('serve', ['dist', 'connect:server', 'watch']);
   
-  grunt.registerTask('default', ['validate', 'dist']);
+  grunt.registerTask('default', ['dist']);
   
 };
