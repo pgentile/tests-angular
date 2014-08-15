@@ -57,10 +57,11 @@ module.exports = function(grunt) {
       }
     },
     connect: {
+      options: {
+        port: 3000
+      },
       server: {
         options: {
-          port: 3000,
-          keepalive: true,
           middleware: function (connect) {
             return [
               connect().use('/static', connect.static('./bower_components')),
@@ -68,6 +69,20 @@ module.exports = function(grunt) {
             ];
           }
         }
+      }
+    },
+    watch: {
+      scripts: {
+        files: ['app/**/*.js'],
+        tasks: ['validate', 'uglify']
+      },
+      html: {
+        files: ['app/**/*.html'],
+        tasks: ['htmlmin']
+      },
+      other: {
+        files: ['app/r/**'],
+        tasks: ['copy']
       }
     }
   });
@@ -78,12 +93,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
   
   grunt.registerTask('validate', ['jshint']);
   
   grunt.registerTask('dist', ['clean', 'copy', 'htmlmin', 'uglify']);
   
-  grunt.registerTask('serve', ['dist', 'connect:server']);
+  grunt.registerTask('serve', ['dist', 'connect:server', 'watch']);
   
   grunt.registerTask('default', ['validate', 'dist']);
   
