@@ -34,6 +34,10 @@ angular.module('dashboard', ['ngAnimate', 'ngRoute', 'tabs', 'd3'])
         templateUrl: 'pages/d3.html',
         controller: 'D3Controller'
       })
+      .when('/flot', {
+        templateUrl: 'pages/flot.html',
+        controller: 'FlotController'
+      })
       .otherwise({
         redirectTo: '/home'
       });
@@ -170,6 +174,101 @@ angular.module('dashboard', ['ngAnimate', 'ngRoute', 'tabs', 'd3'])
     $scope.addNumber = function () {
       $log.info('Ajouter un nombre');
       $scope.data.push($scope.data.length + 1);
+    };
+  })
+  .controller('FlotController', function ($scope, $log) {
+    
+    var generateSerie = function (count, scale, start, prev) {
+      var generateRandomNumber = function () {
+        return (Math.random() >= 0.5 ? 1 : -1) * Math.random() * scale;
+      };
+      
+      start = start || 0;
+      prev = prev || generateRandomNumber();
+      
+      var serie = [];
+      var value = prev;
+      for (var i = start; i < count + start; i++) {
+        value += generateRandomNumber();
+        serie.push([i, value]);
+      }
+      return serie;
+    };
+    
+    var nb = 200;
+    var scale = 50;
+    $scope.series = [
+      generateSerie(nb, scale),
+      generateSerie(nb, scale),
+      generateSerie(nb, scale)
+    ];
+    
+    $scope.addData = function () {
+      $log.info('Ajout de données dans les séries');
+      
+      $scope.series = $scope.series.map(function (serie) {
+        var last = serie[serie.length - 1][1];
+        return serie.concat(generateSerie(nb / 10, scale, serie.length, last));
+      });
+    };
+    
+    $scope.addSerie = function () {
+      $log.info('Ajouter une série');
+      
+      var nbPoints = nb;
+      if ($scope.series.length > 0) {
+        nbPoints = $scope.series[0].length;
+      }
+      
+      $scope.series.push(generateSerie(nbPoints, scale));
+    };
+    
+    $scope.clear = function () {
+      $scope.series = [];
+    };
+    
+  })
+  .directive('flot', function ($timeout, $window, $log) {
+    return {
+      restrict: 'E',
+      scope: {
+        series: '=',
+        height: '@'
+      },
+      link: function (scope, element) {
+        // Utilisation d'un timeout car sinon, flot n'arrive pas à déterminer
+        // la hauteur du placeholder (balise div)
+        $timeout(function () {
+          var plot = element.children('div')
+            .plot(scope.series)
+            .data('plot');
+            
+          scope.$watchCollection('series', function (updatedSeries) {
+            $log.info('Mise à jour du graphe en cours');
+            
+            plot.setData(updatedSeries);
+            plot.setupGrid();
+            plot.draw();
+          });
+          
+          var redrawOnWindowResize = function () {
+            $log.info('Fenêtre retaillée');
+            
+            plot.resize();
+            plot.setupGrid();
+            plot.draw();
+          };
+          
+          $($window).on('resize', redrawOnWindowResize);
+          
+          $log.info('SCOPE =', scope);
+          
+          scope.$on('$destroy', function () {
+            $($window).off('resize', redrawOnWindowResize);
+          });
+        }, 1);
+      },
+      template: '<div ng-style="{ height: height + \'px\' }"></div>'
     };
   });
 
