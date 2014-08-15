@@ -2,6 +2,26 @@
 
 
 angular.module('flot', [])
+  .directive('windowResize', function ($window) {
+    return {
+      restrict: 'A',
+      scope: {
+        windowResize: '&'
+      },
+      link: function (scope) {
+        scope.$watch('windowResize', function (newHandler, oldHandler) {
+          if (oldHandler !== undefined) {
+            $($window).off('resize', oldHandler);
+          }
+          $($window).on('resize', newHandler);
+        });
+        
+        scope.$on('$destroy', function () {
+          $($window).off('resize', scope.windowResize);
+        });
+      }
+    };
+  })
   .directive('flot', function ($timeout, $window, $log) {
     return {
       restrict: 'E',
@@ -25,21 +45,15 @@ angular.module('flot', [])
             plot.draw();
           });
         
-          var redrawOnWindowResize = function () {
+          scope.redrawOnWindowResize = function () {
             $log.debug('Fenêtre retaillée');
           
             plot.resize();
             plot.setupGrid();
             plot.draw();
           };
-        
-          $($window).on('resize', redrawOnWindowResize);
-        
-          scope.$on('$destroy', function () {
-            $($window).off('resize', redrawOnWindowResize);
-          });
         }, 1);
       },
-      template: '<div ng-style="{ height: height + \'px\' }"></div>'
+      templateUrl: '/templates/flot.html'
     };
   });
