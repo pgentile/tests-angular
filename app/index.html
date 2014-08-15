@@ -41,7 +41,7 @@
   </head>
   <body>
     
-    <nav class="navbar navbar-default" role="navigation">
+    <nav class="navbar navbar-default" role="navigation" ng-controller="MainNavController">
       <div class="container-fluid">
 
         <div class="navbar-header">
@@ -54,14 +54,13 @@
           <a class="navbar-brand" href="#">Tests AngularJS</a>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#/home">Accueil</a></li>
-            <li><a href="#/trucs">Trucs</a></li>
-            <li><a href="#/graphs">Graphes</a></li>
-            <li><a href="#/events">Events</a></li>
-            <li><a href="#/d3">D3</a></li>
+            <li ng-class="{ active: isActive('/home') }"><a href="#/home">Accueil</a></li>
+            <li ng-class="{ active: isActive('/trucs') }"><a href="#/trucs">Trucs</a></li>
+            <li ng-class="{ active: isActive('/graphs') }"><a href="#/graphs">Graphes</a></li>
+            <li ng-class="{ active: isActive('/events') }"><a href="#/events">Events</a></li>
+            <li ng-class="{ active: isActive('/d3') }"><a href="#/d3">D3</a></li>
           </ul>
         </div>
 

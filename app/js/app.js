@@ -38,6 +38,15 @@ angular.module('dashboard', ['ngAnimate', 'ngRoute', 'tabs', 'd3'])
         redirectTo: '/home'
       });
   })
+  .controller('MainNavController', function ($scope, $log, $location) {
+    $scope.isActive = function (routeName) {
+      return $location.path() === routeName;
+    };
+    
+    $scope.$on('$routeChangeSuccess', function () {
+      $log.info('Route modifiee =', $location.path());
+    });
+  })
   .controller('TrucsController', function ($scope) {
     $scope.trucs = [];
     for (var i = 0; i < 7; i++) {
