@@ -10,14 +10,18 @@ angular.module('flot', [])
       },
       link: function (scope) {
         scope.$watch('windowResize', function (newHandler, oldHandler) {
-          if (oldHandler !== undefined) {
+          if (angular.isDefined(oldHandler)) {
+            $($window).on('resize', newHandler);
+          }
+          else {
             $($window).off('resize', oldHandler);
           }
-          $($window).on('resize', newHandler);
         });
         
         scope.$on('$destroy', function () {
-          $($window).off('resize', scope.windowResize);
+          if (angular.isDefined(scope.windowResize)) {
+            $($window).off('resize', scope.windowResize);
+          }
         });
       }
     };
