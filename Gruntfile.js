@@ -23,6 +23,7 @@ module.exports = function(grunt) {
           cwd: './app',
           src: ['r/**'],
           dest: './dist',
+          filter: 'isFile'
         }]
       }
     },
@@ -51,10 +52,8 @@ module.exports = function(grunt) {
       },
       dist: {
         files: [{
-          expand: true,
-          cwd: './app',
-          src: ['**/*.js'],
-          dest: './dist'
+          src: ['app/**/*.js'],
+          dest: 'dist/js/app.min.js'
         }]
       }
     },
