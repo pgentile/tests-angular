@@ -57,6 +57,17 @@ module.exports = function(grunt) {
         }]
       }
     },
+    less: {
+      options: {
+        cleancss: true,
+      },
+      dist: {
+        files: [{
+          src: ['app/**/*.less'],
+          dest: './dist/styles/styles.min.css'
+        }]
+      }
+    },
     connect: {
       options: {
         port: 3000
@@ -81,6 +92,10 @@ module.exports = function(grunt) {
         files: ['app/**/*.html'],
         tasks: ['htmlmin']
       },
+      styles: {
+        files: ['app/styles/**/*.less'],
+        tasks: ['less']
+      },
       other: {
         files: ['app/r/**'],
         tasks: ['copy']
@@ -94,11 +109,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
   
   grunt.registerTask('validate', ['jshint']);
   
-  grunt.registerTask('dist', ['clean', 'validate', 'copy', 'htmlmin', 'uglify']);
+  grunt.registerTask('dist', ['clean', 'validate', 'copy', 'htmlmin', 'uglify', 'less']);
   
   grunt.registerTask('serve', ['dist', 'connect:server', 'watch']);
   
