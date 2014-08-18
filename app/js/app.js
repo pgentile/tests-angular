@@ -38,6 +38,10 @@ angular.module('dashboard', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot'])
         templateUrl: 'pages/flot.html',
         controller: 'FlotController'
       })
+      .when('/resize', {
+        templateUrl: 'pages/resize.html',
+        controller: 'ResizeController'
+      })
       .otherwise({
         redirectTo: '/home'
       });
@@ -227,4 +231,9 @@ angular.module('dashboard', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot'])
       $scope.series = [];
     };
     
+  })
+  .controller('ResizeController', function ($scope, $log) {
+    $scope.logEvent = function (event) {
+      $log.info('Event =', event);
+    };
   });

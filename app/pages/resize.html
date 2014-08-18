@@ -1,0 +1,11 @@
+<div>
+
+<h2>Resize</h2>
+
+<pre ng-controller="EventController" window-resize="logEvent($event); event = $event">{{ event|json }}</pre>
+
+<h2>Click</h2>
+
+<p ng-controller="EventController"><button class="btn btn-default" ng-click="logEvent($event)">Cliquer ici</button></p>
+
+</div>
