@@ -2,26 +2,22 @@
 
 
 angular.module('flot', [])
-  .directive('windowResize', function ($window) {
+  .directive('windowResize', function ($window, $parse) {
     return {
       restrict: 'A',
-      scope: {
-        windowResize: '&'
-      },
-      link: function (scope) {
-        scope.$watch('windowResize', function (newHandler, oldHandler) {
-          if (angular.isDefined(oldHandler)) {
-            $($window).on('resize', newHandler);
-          }
-          else {
-            $($window).off('resize', oldHandler);
-          }
-        });
+      link: function (scope, element, attrs) {
+        var fn = $parse(attrs.windowResize);
         
-        scope.$on('$destroy', function () {
-          if (angular.isDefined(scope.windowResize)) {
-            $($window).off('resize', scope.windowResize);
-          }
+        var handler = function (event) {
+          scope.$apply(function () {
+            fn(scope, { $event: event });
+          });
+        };
+        
+        $($window).on('resize', handler);
+        
+        element.on('$destroy', function () {
+          $($window).off('resize', handler);
         });
       }
     };
