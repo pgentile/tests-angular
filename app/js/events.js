@@ -14,10 +14,10 @@ angular.module('events', [])
           });
         };
         
-        $($window).on('resize', handler);
+        angular.element($window).on('resize', handler);
         
         element.on('$destroy', function () {
-          $($window).off('resize', handler);
+          angular.element($window).off('resize', handler);
         });
       }
     };
