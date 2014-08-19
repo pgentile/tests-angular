@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('dashboard', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot'])
+angular.module('dashboard', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'pagination'])
   .config(function ($logProvider) {
     $logProvider.debugEnabled(false);
   })
@@ -41,6 +41,10 @@ angular.module('dashboard', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot'])
       .when('/resize', {
         templateUrl: 'pages/resize.html',
         controller: 'ResizeController'
+      })
+      .when('/pagination', {
+        templateUrl: 'pages/pagination.html',
+        controller: 'PaginationController'
       })
       .otherwise({
         redirectTo: '/home'
@@ -236,4 +240,7 @@ angular.module('dashboard', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot'])
     $scope.logEvent = function (event) {
       $log.info('Event =', event);
     };
+  })
+  .controller('PaginationController', function () {
+    
   });
