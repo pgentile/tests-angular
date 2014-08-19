@@ -1,6 +1,12 @@
-<p>{{ graphs.length }} graphes trouvés :</p>
-<ul>
-  <li ng-repeat="graph in graphs">
-    <a ng-href="#/graph/{{ graph.id }}">{{ graph.title | upper }}</a>
-  </li>
-</ul>
+<div>
+  
+  <h1>Répétitions et filtres</h1>
+
+  <p>{{ graphs.length }} graphes trouvés :</p>
+  <ul>
+    <li ng-repeat="graph in graphs">
+      <a ng-href="#/graph/{{ graph.id }}">{{ graph.title | upper }}</a>
+    </li>
+  </ul>
+
+</div>
