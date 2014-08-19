@@ -64,8 +64,16 @@ module.exports = function(grunt) {
       dist: {
         files: [{
           src: ['app/**/*.less'],
-          dest: './dist/styles/styles.min.css'
+          dest: 'dist/styles/styles.min.css'
         }]
+      }
+    },
+    autoprefixer: {
+      options: {
+        browsers: ['last 2 version']
+      },
+      dist: {
+        src: 'dist/styles/styles.min.css'
       }
     },
     connect: {
@@ -94,7 +102,7 @@ module.exports = function(grunt) {
       },
       styles: {
         files: ['app/styles/**/*.less'],
-        tasks: ['less']
+        tasks: ['less', 'autoprefixer']
       },
       other: {
         files: ['app/r/**'],
@@ -110,11 +118,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-watch');
   
   grunt.registerTask('validate', ['jshint']);
   
-  grunt.registerTask('dist', ['clean', 'validate', 'copy', 'htmlmin', 'uglify', 'less']);
+  grunt.registerTask('dist', ['clean', 'validate', 'copy', 'htmlmin', 'uglify', 'less', 'autoprefixer']);
   
   grunt.registerTask('serve', ['dist', 'connect:server', 'watch']);
   
