@@ -241,6 +241,8 @@ angular.module('dashboard', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'pagi
       $log.info('Event =', event);
     };
   })
-  .controller('PaginationController', function () {
-    
+  .controller('PaginationController', function ($scope, $window) {
+    $scope.showPage = function (page) {
+      $window.alert('Page changed: ' + page);
+    };
   });

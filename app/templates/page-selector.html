@@ -1,0 +1,8 @@
+<ul class="pagination">
+  <li><a href="">&laquo;</a></li>
+  <li ng-repeat="page in ctrl.getPages()" ng-class="{ active: ctrl.isPageActive(page) }">
+    <a href="" ng-click="ctrl.changePage(page)">{{ page }}</a>
+  </li>
+  <li><a href="">&raquo;</a></li>
+  <!-- classes utiles : active, disabled -->
+</ul>
