@@ -2,62 +2,35 @@
 
 
 angular.module('pagination', [])
-  .directive('pagination', function ($log) {
-    return {
-      restrict: 'E',
-      controller: function () {
-        this.pages = [1, 2, 3];
-        this.currentPage = 1;
-        this.lastPage = 3;
-        
-        this.selectors = [];
-        
-        this.registerSelector = function (selector) {
-          $log.info('Registring ', selector);
-          this.selectors.push(selector);
-          selector.pagination = this;
-        };
-        
-        this.deregisterSelector = function (selector) {
-          $log.error('FIXME Deregister selector', selector);
-        };
-        
-        this.changePage = function (newPage) {
-          if (newPage !== this.currentPage) {
-            this.currentPage = newPage;
-          }
-        };
-      },
-    };
-  })
   .directive('pageSelector', function () {
     return {
       restrict: 'E',
-      scope: {},
-      require: ['pageSelector', '^pagination'],
-      controllerAs: 'ctrl',
-      controller: function () {
-        this.changePage = function (newPage) {
-          this.pagination.changePage(newPage);
-        };
-        
-        this.getPages = function () {
-          return this.pagination.pages;
-        };
-        
-        this.isPageActive = function (page) {
-          return page === this.pagination.currentPage;
-        };
+      scope: {
+        current: '=',
+        max: '=',
+        changePage: '&'
       },
-      link: function (scope, element, attrs, controllers) {
-        var controller = controllers[0];
-        var paginationController = controllers[1];
-        
-        paginationController.registerSelector(controller);
-        
-        element.on('$destroy', function () {
-          paginationController.deregisterSelector(controller);
+      link: function (scope) {
+        // FIXME Utiliser scope.$watchGroup avec Angular 1.3
+        angular.forEach(['current', 'max'], function (expr) {
+          scope.$watch(expr, function () {
+            scope.pages = [];
+            for (var i = 0; i < Math.max(1, scope.max); i++) {
+              scope.pages.push(i + 1);
+            }
+          });
         });
+        
+        scope.isPageActive = function (page) {
+          return scope.current === page;
+        };
+        
+        scope.triggerPageChange = function (newPage) {
+          if (newPage !== scope.current && newPage >= 1 && newPage <= scope.max) {
+            scope.current = newPage;
+            scope.changePage({ page: newPage });
+          }
+        };
       },
       templateUrl: '/templates/page-selector.html'
     };
