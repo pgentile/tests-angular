@@ -2,6 +2,11 @@
 
 
 angular.module('pagination', [])
+  .filter('maxPageForItems', function () {
+    return function (count, perPage) {
+      return Math.max(1, Math.ceil(count / perPage));
+    };
+  })
   .directive('pageSelector', function () {
     return {
       restrict: 'E',
@@ -11,7 +16,7 @@ angular.module('pagination', [])
         changePage: '&'
       },
       link: function (scope) {
-        // FIXME Utiliser scope.$watchGroup avec Angular 1.3
+        // TODO Utiliser scope.$watchGroup avec Angular 1.3
         angular.forEach(['current', 'max'], function (expr) {
           scope.$watch(expr, function () {
             scope.pages = [];

@@ -2,15 +2,19 @@
 
   <h1>Pagination</h1>
   
-  <h2>Exemple <small>Page {{ currentPage }} / {{ maxPage }}</small></h2>
+  <h2>Exemple <small>Page {{ currentPage }} / {{ count | maxPageForItems:itemsPerPage }}</small></h2>
   
   <form role="form">
     <div class="form-group">
-      <label for="maxPage">Page max.</label>
-      <input type="number" class="form-control" id="maxPage" min="1" ng-model="maxPage">
+      <label for="count">Nombre d'éléments</label>
+      <input type="number" class="form-control" id="count" min="0" ng-model="count">
+    </div>
+    <div class="form-group">
+      <label for="itemsPerPage">Eléments par page</label>
+      <input type="number" class="form-control" id="itemsPerPage" min="1" ng-model="itemsPerPage">
     </div>
   </form>
   
-  <page-selector current="currentPage" max="maxPage" change-page="pageChanged(page)"></page-selector>
+  <page-selector current="currentPage" max="count | maxPageForItems:itemsPerPage" change-page="loadPage(page)"></page-selector>
   
 </div>

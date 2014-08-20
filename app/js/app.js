@@ -241,17 +241,23 @@ angular.module('dashboard', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'pagi
       $log.info('Event =', event);
     };
   })
-  .controller('PaginationController', function ($scope, $log) {
+  .controller('PaginationController', function ($scope, $log, $filter) {
     $scope.currentPage = 1;
-    $scope.maxPage = 6;
+    $scope.count = 65;
+    $scope.itemsPerPage = 10;
     
-    $scope.$watch('maxPage', function () {
-      if ($scope.currentPage > $scope.maxPage) {
-        $scope.currentPage = $scope.maxPage;
-      }
+    var maxPageForItems = $filter('maxPageForItems');
+    // TODO Utiliser scope.$watchGroup avec Angular 1.3
+    angular.forEach(['count', 'itemsPerPage'], function (expr) {
+      $scope.$watch(expr, function () {
+        var maxPage = maxPageForItems($scope.count, $scope.itemsPerPage);
+        if ($scope.currentPage > maxPage) {
+          $scope.currentPage = maxPage;
+        }
+      });
     });
     
-    $scope.pageChanged = function (page) {
+    $scope.loadPage = function (page) {
       $log.info('Page changed to', page);
     };
   });
