@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('dashboard', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'pagination'])
+angular.module('tests', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'pagination'])
   .config(function ($logProvider) {
     $logProvider.debugEnabled(false);
   })
