@@ -245,6 +245,12 @@ angular.module('dashboard', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'pagi
     $scope.currentPage = 1;
     $scope.maxPage = 6;
     
+    $scope.$watch('maxPage', function () {
+      if ($scope.currentPage > $scope.maxPage) {
+        $scope.currentPage = $scope.maxPage;
+      }
+    });
+    
     $scope.pageChanged = function (page) {
       $log.info('Page changed to', page);
     };

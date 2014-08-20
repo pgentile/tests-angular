@@ -4,6 +4,13 @@
   
   <h2>Exemple <small>Page {{ currentPage }} / {{ maxPage }}</small></h2>
   
+  <form role="form">
+    <div class="form-group">
+      <label for="maxPage">Page max.</label>
+      <input type="number" class="form-control" id="maxPage" min="1" ng-model="maxPage">
+    </div>
+  </form>
+  
   <page-selector current="currentPage" max="maxPage" change-page="pageChanged(page)"></page-selector>
   
 </div>
