@@ -5,16 +5,24 @@ describe('Accueil Tests AngularJS', function () {
     var title = $('h1');
     expect(title.getText()).toContain('Accueil');
     
-    var nameInput = $('input#graph-name');
-    nameInput.sendKeys('Pierre');
+    var name = 'Pierre';
     
-    var okButton = element(by.cssContainingText('button', 'OK')).click();
+    var nameInput = $('input#graph-name');
+    nameInput.sendKeys(name);
+    
+    var replicatInput = $('input#repliquat-name');
+    expect(replicatInput.getAttribute('value')).toEqual(name);
+    
+    var showName = element(by.binding('name'));
+    expect(showName.getText()).toEqual('Nom : ' + name);
+    
+    var okButton = element(by.buttonText('OK')).click();
     
     browser.driver.switchTo().alert().accept();
   });
   
   it('doit naviguer sur la page suivante', function () {
-    browser.get('');
+    // browser.get('');
     
     var trucsLink = element(by.cssContainingText('nav ul.nav > li a', 'Trucs'));
     trucsLink.click();
@@ -24,7 +32,7 @@ describe('Accueil Tests AngularJS', function () {
   });
   
   it('doit naviguer sur la pagination', function () {
-    browser.get('');
+    // browser.get('');
     
     var paginationLink = element(by.cssContainingText('nav ul.nav > li a', 'Pagination'));
     paginationLink.click();
