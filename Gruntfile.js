@@ -108,6 +108,16 @@ module.exports = function(grunt) {
         files: ['app/r/**'],
         tasks: ['copy']
       }
+    },
+    protractor: {
+      e2e: {
+        options: {
+          configFile: 'tests/e2e/protractor.conf.js',
+          args: {
+            baseUrl: 'http://localhost:3000'
+          }
+        }
+      }
     }
   });
   
@@ -120,11 +130,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-protractor-runner');
   
   grunt.registerTask('validate', ['jshint']);
-  
   grunt.registerTask('dist', ['clean', 'validate', 'copy', 'htmlmin', 'uglify', 'less', 'autoprefixer']);
-  
+  grunt.registerTask('test', ['dist', 'connect:server', 'protractor:e2e']);
   grunt.registerTask('serve', ['dist', 'connect:server', 'watch']);
   
   grunt.registerTask('default', ['dist']);
