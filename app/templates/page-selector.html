@@ -3,12 +3,11 @@
     <a href="" ng-click="triggerPageChange(current - 1)">&laquo;</a>
   </li>
   
-  <li ng-repeat="page in pages" ng-class="{ active: isPageActive(page) }">
+  <li ng-repeat="page in range()" ng-class="{ active: isPageActive(page) }">
     <a href="" ng-click="triggerPageChange(page)">{{ page }}</a>
   </li>
   
   <li ng-class="{ disabled: isPageActive(max) }">
     <a href="" ng-click="triggerPageChange(current + 1)">&raquo;</a>
   </li>
-  <!-- classes utiles : active, disabled -->
 </ul>

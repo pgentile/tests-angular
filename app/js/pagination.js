@@ -15,16 +15,27 @@ angular.module('pagination', [])
         max: '=',
         changePage: '&'
       },
-      link: function (scope) {
-        // TODO Utiliser scope.$watchGroup avec Angular 1.3
-        angular.forEach(['current', 'max'], function (expr) {
-          scope.$watch(expr, function () {
-            scope.pages = [];
-            for (var i = 0; i < Math.max(1, scope.max); i++) {
-              scope.pages.push(i + 1);
+      link: function (scope, element, attrs) {
+        var rangeSize = parseInt(attrs.rangeSize) || 10;
+        
+        scope.range = function () {
+          var range = [scope.current];
+          var first = scope.current, last = scope.current;
+          
+          while (range.length < rangeSize && (first > 1 || last < scope.max)) {
+            // Mieux vaut avoir des liens pour avancer que pour reculer
+            if (range.length < rangeSize && last < scope.max) {
+              last++;
+              range.push(last);
             }
-          });
-        });
+            if (range.length < rangeSize && first > 1) {
+              first--;
+              range.unshift(first);
+            }
+          }
+          
+          return range;
+        };
         
         scope.isPageActive = function (page) {
           return scope.current === page;
