@@ -13,9 +13,6 @@ angular.module('tests', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'paginati
       return value.toUpperCase();
     };
   })
-  .config(function ($locationProvider) {
-    $locationProvider.html5Mode(true);
-  })
   .config(function ($routeProvider) {
     $routeProvider
       .when('/home', {
