@@ -33,14 +33,9 @@
 
         <div class="collapse navbar-collapse" id="navbar-collapse">
           <ul class="nav navbar-nav">
-            <li ng-class="{ active: isActive('/home') }"><a href="#!/home">Accueil</a></li>
-            <li ng-class="{ active: isActive('/trucs') }"><a href="#!/trucs">Trucs</a></li>
-            <li ng-class="{ active: isActive('/graphs') }"><a href="#!/graphs">Graphes</a></li>
-            <li ng-class="{ active: isActive('/events') }"><a href="#!/events">Events</a></li>
-            <li ng-class="{ active: isActive('/d3') }"><a href="#!/d3">D3</a></li>
-            <li ng-class="{ active: isActive('/flot') }"><a href="#!/flot">Flot</a></li>
-            <li ng-class="{ active: isActive('/resize') }"><a href="#!/resize">Resize</a></li>
-            <li ng-class="{ active: isActive('/pagination') }"><a href="#!/pagination">Pagination</a></li>
+            <li ng-repeat="page in pages" ng-class="{ active: isActive(page.url) }">
+              <a ng-href="#!{{ page.url }}">{{ page.name }}</a>
+            </li>
           </ul>
         </div>
 

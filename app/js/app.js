@@ -16,44 +16,76 @@ angular.module('tests', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'paginati
       return value.toUpperCase();
     };
   })
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/home', {
-        templateUrl: 'pages/home.html'
-      })
-      .when('/trucs', {
-        templateUrl: 'pages/trucs.html',
-        controller: 'TrucsController'
-      })
-      .when('/graphs', {
-        templateUrl: 'pages/graphs.html',
-        controller: 'GraphController'
-      })
-      .when('/events', {
-        templateUrl: 'pages/events.html',
-        controller: 'EventWatcherController'
-      })
-      .when('/d3', {
-        templateUrl: 'pages/d3.html',
-        controller: 'D3Controller'
-      })
-      .when('/flot', {
-        templateUrl: 'pages/flot.html',
-        controller: 'FlotController'
-      })
-      .when('/resize', {
-        templateUrl: 'pages/resize.html',
-        controller: 'ResizeController'
-      })
-      .when('/pagination', {
-        templateUrl: 'pages/pagination.html',
-        controller: 'PaginationController'
-      })
-      .otherwise({
+  .constant('pages', [
+    {
+      name: 'Accueil',
+      url: '/home',
+      templateUrl: 'pages/home.html'
+    },
+    {
+      name: 'Trucs',
+      url: '/trucs',
+      templateUrl: 'pages/trucs.html',
+      controller: 'TrucsController'
+    },
+    {
+      name: 'Graphes',
+      url: '/graphs',
+      templateUrl: 'pages/graphs.html',
+      controller: 'GraphController'
+    },
+    {
+      name: 'Evénements',
+      url: '/events',
+      templateUrl: 'pages/events.html',
+      controller: 'EventWatcherController'
+    },
+    {
+      name: 'D3',
+      url: '/d3',
+      templateUrl: 'pages/d3.html',
+      controller: 'D3Controller'
+    },
+    {
+      name: 'Flot',
+      url: '/flot',
+      templateUrl: 'pages/flot.html',
+      controller: 'FlotController'
+    },
+    {
+      name: 'Resize',
+      url: '/resize',
+      templateUrl: 'pages/resize.html',
+      controller: 'ResizeController'
+    },
+    {
+      name: 'Pagination',
+      url: '/pagination',
+      templateUrl: 'pages/pagination.html',
+      controller: 'PaginationController'
+    },
+  ])
+  .config(function ($routeProvider, pages) {
+      angular.forEach(pages, function (page) {
+        $routeProvider.when(page.url, {
+          templateUrl: page.templateUrl,
+          controller: page.controller
+        });
+      });
+      
+      $routeProvider.otherwise({
         redirectTo: '/home'
       });
   })
-  .controller('MainNavController', function ($scope, $log, $location) {
+  .controller('MainNavController', function ($scope, $log, $location, pages) {
+    $scope.pages = [];
+    angular.forEach(pages, function (page) {
+      $scope.pages.push({
+        name: page.name,
+        url: page.url
+      });
+    });
+    
     $scope.isActive = function (routeName) {
       return $location.path() === routeName;
     };
