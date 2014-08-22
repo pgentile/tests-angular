@@ -1,43 +1,120 @@
-describe('Accueil Tests AngularJS', function () {
-  it('doit afficher la page d\'accueil', function () {
+'use strict';
+
+var util = require('util');
+
+
+function BasePage() {
+  var navBar = element(by.css('nav'));
+  
+  this.open = function (text) {
     browser.get('');
+    navBar.element(by.cssContainingText('a', text)).click();
+  };
+  
+  this.getTitle = function () {
+    return element(by.css('h1')).getText();
+  };
+
+}
+
+
+function AccueilPage() {
+  BasePage.call(this);
+  
+  var nameInput = $('input#graph-name');
+  var replicatInput = $('input#repliquat-name');
+  var nameDisplay = element(by.binding('name'));
+  var okButton = element(by.buttonText('OK'));
+  
+  this.setName = function (name) {
+    nameInput.clear().then(function () {
+      nameInput.sendKeys(name);
+    });
+  };
+  
+  this.getName = function () {
+    return nameInput.getAttribute('value');
+  };
+  
+  this.setReplicat = function (replicat) {
+    replicatInput.clear().then(function () {
+      replicatInput.sendKeys(replicat);
+    });
+  };
+  
+  this.getReplicat = function () {
+    return replicatInput.getAttribute('value');
+  };
+  
+  this.getNameDisplay = function () {
+    return nameDisplay.getText();
+  };
+  
+  this.submit = function () {
+    okButton.click();
+  };
+  
+  this.dismissAndReadAlert = function () {
+    var alert = browser.switchTo().alert();
+    var accepted = alert.accept();
+    return alert.getText();
+  };
+  
+}
+
+util.inherits(AccueilPage, BasePage);
+
+
+function PaginationPage() {
+  BasePage.call(this);
+}
+
+util.inherits(PaginationPage, BasePage);
+
+
+function TrucsPage() {
+  BasePage.call(this);
+}
+
+util.inherits(TrucsPage, BasePage);
+
+
+describe('Accueil Tests AngularJS', function () {
+  it('doit naviguer sur la page d\'accueil', function () {
+    var page = new AccueilPage();
+    page.open('Accueil');
     
-    var title = $('h1');
-    expect(title.getText()).toContain('Accueil');
+    expect(page.getTitle()).toContain('Accueil');
     
     var name = 'Pierre';
     
-    var nameInput = $('input#graph-name');
-    nameInput.sendKeys(name);
+    page.setName(name);
+    expect(page.getReplicat()).toEqual(name);
     
-    var replicatInput = $('input#repliquat-name');
-    expect(replicatInput.getAttribute('value')).toEqual(name);
+    expect(page.getNameDisplay()).toEqual('Nom : ' + name);
     
-    var showName = element(by.binding('name'));
-    expect(showName.getText()).toEqual('Nom : ' + name);
+    page.submit();
+    expect(page.dismissAndReadAlert()).toEqual('Salut, ' + name + ' !');
     
-    var okButton = element(by.buttonText('OK')).click();
+    var newName = 'Roberto';
     
-    browser.driver.switchTo().alert().accept();
+    page.setReplicat(newName);
+    expect(page.getReplicat()).toEqual(newName);
+    
+    expect(page.getNameDisplay()).toEqual('Nom : ' + newName);
   });
   
-  it('doit naviguer sur la page suivante', function () {
-    // browser.get('');
-    
-    var trucsLink = element(by.cssContainingText('nav ul.nav > li a', 'Trucs'));
-    trucsLink.click();
-    
-    var title = $('h1');
-    expect(title.getText()).toEqual('Tabs avec Bootstrap');
+  it('doit naviguer sur la page des trucs', function () {
+    var page = new TrucsPage();
+    page.open('Trucs');
+
+    expect(page.getTitle()).toEqual('Tabs avec Bootstrap');
   });
   
   it('doit naviguer sur la pagination', function () {
-    // browser.get('');
+    var page = new PaginationPage();
+    page.open('Pagination');
     
-    var paginationLink = element(by.cssContainingText('nav ul.nav > li a', 'Pagination'));
-    paginationLink.click();
-    
-    var title = $('h1');
-    expect(title.getText()).toEqual('Pagination');
+    expect(page.getTitle()).toEqual('Pagination');
   });
 });
