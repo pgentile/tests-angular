@@ -5,6 +5,9 @@ angular.module('tests', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'paginati
   .config(function ($logProvider) {
     $logProvider.debugEnabled(false);
   })
+  .config(function ($locationProvider) {
+    $locationProvider.hashPrefix('!');
+  })
   .factory('alerting', function ($window) {
     return $window.alert;
   })
