@@ -107,13 +107,21 @@ module.exports = function(grunt) {
       other: {
         files: ['app/r/**'],
         tasks: ['copy']
+      },
+      karma: {
+        files: ['app/**/*.js', 'tests/unit/**/*.spec.js'],
+        tasks: ['karma:watch:run']
       }
     },
     karma: {
+      options: {
+        configFile: 'tests/unit/karma.conf.js'
+      },
       unit: {
-        options: {
-          configFile: 'tests/unit/karma.conf.js'
-        }
+        singleRun: true
+      },
+      watch: {
+        background: true
       }
     },
     protractor: {
@@ -141,9 +149,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-karma');
   
   grunt.registerTask('validate', ['jshint']);
-  grunt.registerTask('dist', ['clean', 'validate', 'copy', 'htmlmin', 'uglify', 'less', 'autoprefixer']);
+  grunt.registerTask('dist', ['clean', 'validate', 'karma:unit', 'copy', 'htmlmin', 'uglify', 'less', 'autoprefixer']);
   grunt.registerTask('test', ['dist', 'connect:server', 'protractor:e2e']);
-  grunt.registerTask('serve', ['dist', 'connect:server', 'watch']);
+  grunt.registerTask('dev', ['dist', 'connect:server', 'karma:watch', 'watch']);
   
   grunt.registerTask('default', ['dist']);
   
