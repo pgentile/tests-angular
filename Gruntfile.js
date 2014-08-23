@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: './app',
-          src: ['r/**'],
+          src: ['r/**', 'images/**'],
           dest: './dist',
           filter: 'isFile'
         }]
@@ -105,7 +105,7 @@ module.exports = function(grunt) {
         tasks: ['less', 'autoprefixer']
       },
       other: {
-        files: ['app/r/**'],
+        files: ['app/r/**', 'app/images/**'],
         tasks: ['copy']
       },
       karma: {
