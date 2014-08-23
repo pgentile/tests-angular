@@ -23,7 +23,8 @@ function AccueilPage() {
   
   var nameInput = $('input#graph-name');
   var replicatInput = $('input#repliquat-name');
-  var nameDisplay = element(by.binding('name'));
+  
+  var nameDisplay = element(by.cssContainingText('p', 'Nom :'));
   var okButton = element(by.buttonText('OK'));
   
   this.setName = function (name) {
@@ -79,7 +80,8 @@ function TrucsPage() {
 util.inherits(TrucsPage, BasePage);
 
 
-describe('Accueil Tests AngularJS', function () {
+describe('Tests AngularJS', function () {
+  
   it('doit naviguer sur la page d\'accueil', function () {
     var page = new AccueilPage();
     page.open('Accueil');
