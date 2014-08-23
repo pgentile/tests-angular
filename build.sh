@@ -3,4 +3,4 @@
 npm install
 node node_modules/grunt-protractor-runner/scripts/webdriver-manager-update
 bower install
-grunt test
+grunt dist
