@@ -109,6 +109,13 @@ module.exports = function(grunt) {
         tasks: ['copy']
       }
     },
+    karma: {
+      unit: {
+        options: {
+          configFile: 'tests/unit/karma.conf.js'
+        }
+      }
+    },
     protractor: {
       e2e: {
         options: {
@@ -131,6 +138,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-autoprefixer');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-protractor-runner');
+  grunt.loadNpmTasks('grunt-karma');
   
   grunt.registerTask('validate', ['jshint']);
   grunt.registerTask('dist', ['clean', 'validate', 'copy', 'htmlmin', 'uglify', 'less', 'autoprefixer']);
