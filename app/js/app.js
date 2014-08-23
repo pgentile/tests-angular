@@ -64,6 +64,12 @@ angular.module('tests', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'paginati
       templateUrl: 'pages/pagination.html',
       controller: 'PaginationController'
     },
+    {
+      name: 'Erreurs',
+      url: '/errors',
+      templateUrl: 'pages/errors.html',
+      controller: 'TriggerErrorController'
+    }
   ])
   .config(function ($routeProvider, pages) {
       angular.forEach(pages, function (page) {
@@ -93,6 +99,32 @@ angular.module('tests', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'paginati
     $scope.$on('$routeChangeSuccess', function () {
       $log.info('Route modifiee =', $location.path());
     });
+  })
+  .factory('$exceptionHandler', function ($injector, $log) {
+    return function (exception, cause) {
+      $log.error('Exception = ', exception);
+      $log.error('Cause =', cause);
+      
+      var rootScope = $injector.get('$rootScope');
+      rootScope.$broadcast('exceptionCaught', {
+        exception: exception,
+        cause: cause
+      });
+    };
+  })
+  .controller('ErrorController', function ($scope) {
+    
+    $scope.$on('exceptionCaught', function (event, args) {
+      $scope.errMessage = args.exception.message;
+    });  
+    
+  })
+  .controller('TriggerErrorController', function ($scope) {
+    
+      $scope.triggerError = function () {
+        throw new Error('ERROR ERROR ERROR');
+      };
+      
   })
   .controller('TrucsController', function ($scope) {
     $scope.trucs = [];
