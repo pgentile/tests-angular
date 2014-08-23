@@ -10,6 +10,9 @@ exports.config = {
     },
     // {
     //   browserName: 'firefox'
+    // },
+    // {
+    //   browserName: 'safari'
     // }
   ],
   maxSessions: 1
