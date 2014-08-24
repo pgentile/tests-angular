@@ -43,10 +43,7 @@ angular.module('tree', [])
           $log.info('callTree - Controller =', controller);
 
           var varName = attrs.varName;
-          var recallScope = scope.$new(true);
-          // scope.$watch(attrs.value, function (value) {
-          //   recallScope[varName] = value;
-          // });
+          var recallScope = scope.$new();
           recallScope[varName] = scope.$eval(attrs.value);
           
           controller.recall(recallScope, function (cloned) {

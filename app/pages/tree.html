@@ -5,7 +5,12 @@
   <div tree>
     <ul>
       <li ng-repeat="item in arbre">
-        <p><input ng-model="item.name"> <button ng-click="arbre.splice($index, 1)">DELETE</button></p>
+        <p>
+          <input ng-model="item.name">
+          {{ x }}
+          <button ng-click="arbre.splice($index, 1)">DELETE</button>
+          <button ng-click="addChild(item)">ADD CHILD</button>
+        </p>
         <call-tree var-name="arbre" value="item.children"></call-tree>
       </li>
     </ul>

@@ -335,6 +335,15 @@ angular.module('tests', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'paginati
     };
   })
   .controller('TreeController', function ($scope) {
+    $scope.x = 'XXX';
+    
+    $scope.addChild = function (parent) {
+      parent.children.push({
+        name: 'New child',
+        children: []
+      });
+    };
+    
     $scope.arbre = [
       {
         name: 'Parent 1',
@@ -343,15 +352,18 @@ angular.module('tests', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'paginati
             name: 'Child 1.1',
             children: [
               {
-                name: 'Sub child 1.1.1'
+                name: 'Sub child 1.1.1',
+                children: []
               },
               {
-                name: 'Sub child 1.1.2'
+                name: 'Sub child 1.1.2',
+                children: []
               }
             ]
           },
           {
-            name: 'Child 1.2'
+            name: 'Child 1.2',
+            children: []
           }
         ]
       },
@@ -359,10 +371,12 @@ angular.module('tests', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'paginati
         name: 'Parent 2',
         children: [
           {
-            name: 'Child 2.1'
+            name: 'Child 2.1',
+            children: []
           },
           {
-            name: 'Child 2.2'
+            name: 'Child 2.2',
+            children: []
           }
         ]
       },
