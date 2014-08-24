@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('tests', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'pagination'])
+angular.module('tests', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'pagination', 'tree'])
   .config(function ($logProvider) {
     $logProvider.debugEnabled(false);
   })
@@ -69,6 +69,12 @@ angular.module('tests', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'paginati
       url: '/errors',
       templateUrl: 'pages/errors.html',
       controller: 'TriggerErrorController'
+    },
+    {
+      name: 'Tree',
+      url: '/tree',
+      templateUrl: 'pages/tree.html',
+      controller: 'TreeController'
     }
   ])
   .config(function ($routeProvider, pages) {
@@ -327,4 +333,38 @@ angular.module('tests', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'paginati
     $scope.loadPage = function (page) {
       $log.info('Page changed to', page);
     };
+  })
+  .controller('TreeController', function ($scope) {
+    $scope.arbre = [
+      {
+        name: 'Parent 1',
+        children: [
+          {
+            name: 'Child 1.1',
+            children: [
+              {
+                name: 'Sub child 1.1.1'
+              },
+              {
+                name: 'Sub child 1.1.2'
+              }
+            ]
+          },
+          {
+            name: 'Child 1.2'
+          }
+        ]
+      },
+      {
+        name: 'Parent 2',
+        children: [
+          {
+            name: 'Child 2.1'
+          },
+          {
+            name: 'Child 2.2'
+          }
+        ]
+      },
+    ];
   });

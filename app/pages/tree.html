@@ -1,0 +1,18 @@
+<div>
+
+  <h1>Tree</h1>
+  
+  <div tree>
+    <ul>
+      <li ng-repeat="item in arbre">
+        <p><input ng-model="item.name"> <button ng-click="arbre.splice($index, 1)">DELETE</button></p>
+        <call-tree var-name="arbre" value="item.children"></call-tree>
+      </li>
+    </ul>
+  </div tree>
+  
+  <hr>
+
+  <pre>{{ arbre | json }}</pre>
+
+</div>
