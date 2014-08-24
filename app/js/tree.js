@@ -5,6 +5,7 @@ angular.module('tree', [])
   .directive('tree', function ($compile, $log) {
     return {
       restrict: 'A',
+      scope: true,
       controller: function () {
         $log.info('tree - Creating controller');
         
@@ -35,6 +36,7 @@ angular.module('tree', [])
     return {
       restrict: 'AE',
       require: '^tree',
+      scope: true,
       compile: function (element) {
         $log.info('callTree - Compiling', element.get(0));
         
@@ -42,11 +44,11 @@ angular.module('tree', [])
           $log.info('callTree - Linking', element.get(0));
           $log.info('callTree - Controller =', controller);
 
-          var varName = attrs.varName;
-          var recallScope = scope.$new();
-          recallScope[varName] = scope.$eval(attrs.value);
+          // Toute la magie est ici : on écrase dans le scope descendant
+          // la variable de scope sur laquelle appliquer la récursion.
+          scope[attrs.varName] = scope.$eval(attrs.value);
           
-          controller.recall(recallScope, function (cloned) {
+          controller.recall(scope, function (cloned) {
             element.append(cloned);
           });
         };
