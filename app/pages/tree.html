@@ -2,8 +2,10 @@
 
   <h1>Tree</h1>
   
-  <div tree>
-    <ul>
+  <p>X = <input ng-model="x"></p>
+  
+  <tree>
+    <ul ng-if="arbre.length > 0">
       <li ng-repeat="item in arbre">
         <p>
           <input ng-model="item.name">
@@ -14,26 +16,10 @@
         <call-tree var-name="arbre" value="item.children"></call-tree>
       </li>
     </ul>
-  </div>
+  </tree>
   
   <hr>
 
   <pre>{{ arbre | json }}</pre>
-  
-  <hr>
-  
-  <div tree>
-    <ul>
-      <li ng-repeat="item in arbre">
-        <p>
-          <input ng-model="item.name">
-          {{ x }}
-          <button ng-click="arbre.splice($index, 1)">DELETE</button>
-          <button ng-click="addChild(item)">ADD CHILD</button>
-        </p>
-        <call-tree var-name="arbre" value="item.children"></call-tree>
-      </li>
-    </ul>
-  </div>
-  
+
 </div>

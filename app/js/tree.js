@@ -4,8 +4,7 @@
 angular.module('tree', [])
   .directive('tree', function ($compile, $log) {
     return {
-      restrict: 'A',
-      scope: true,
+      restrict: 'AE',
       controller: function () {
         $log.info('tree - Creating controller');
         
@@ -19,9 +18,7 @@ angular.module('tree', [])
       compile: function (element) {
         $log.info('tree - Compiling', element.get(0));
         
-        var elementClone = element.clone();
-        elementClone.removeAttr('tree');
-        
+        var elementClone = element.children().clone();
         var compiled = $compile(elementClone);
         
         return function (scope, element, attrs, controller) {
