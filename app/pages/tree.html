@@ -13,7 +13,7 @@
           <button ng-click="arbre.splice($index, 1)">DELETE</button>
           <button ng-click="addChild(item)">ADD CHILD</button>
         </p>
-        <call-tree var-name="arbre" value="item.children"></call-tree>
+        <call-tree rebind="arbre = item.children"></call-tree>
       </li>
     </ul>
   </tree>

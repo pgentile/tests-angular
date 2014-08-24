@@ -7,13 +7,6 @@ angular.module('tree', [])
       restrict: 'AE',
       controller: function () {
         $log.info('tree - Creating controller');
-        
-        this.recall = null;
-        
-        this.setRecall = function (recall) {
-          $log.info('tree - Set recall');
-          this.recall = recall;
-        };
       },
       compile: function (element) {
         $log.info('tree - Compiling', element.get(0));
@@ -23,7 +16,7 @@ angular.module('tree', [])
         
         return function (scope, element, attrs, controller) {
           $log.info('tree - Linking', element.get(0));
-          controller.setRecall(compiled);
+          controller.template = compiled;
           
         };
       }
@@ -34,8 +27,12 @@ angular.module('tree', [])
       restrict: 'AE',
       require: '^tree',
       scope: true,
-      compile: function (element) {
+      compile: function (element, attrs) {
         $log.info('callTree - Compiling', element.get(0));
+        
+        if (angular.isUndefined(attrs.rebind)) {
+          throw new Error('Attribut rebind non défini');
+        }
         
         return function (scope, element, attrs, controller) {
           $log.info('callTree - Linking', element.get(0));
@@ -43,9 +40,10 @@ angular.module('tree', [])
 
           // Toute la magie est ici : on écrase dans le scope descendant
           // la variable de scope sur laquelle appliquer la récursion.
-          scope[attrs.varName] = scope.$eval(attrs.value);
+          // scope[attrs.varName] = scope.$eval(attrs.value);
+          scope.$eval(attrs.rebind);
           
-          controller.recall(scope, function (cloned) {
+          controller.template(scope, function (cloned) {
             element.append(cloned);
           });
         };
