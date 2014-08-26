@@ -2,23 +2,25 @@
 
   <h1>Tree</h1>
   
-  <p>X = <input ng-model="x"></p>
+  <h2>Arbre</h2>
   
-  <tree>
-    <ul ng-if="arbre.length > 0">
-      <li ng-repeat="item in arbre">
-        <p>
-          <input ng-model="item.name">
-          {{ x }}
-          <button ng-click="arbre.splice($index, 1)">DELETE</button>
-          <button ng-click="addChild(item)">ADD CHILD</button>
-        </p>
-        <call-tree rebind="arbre = item.children"></call-tree>
-      </li>
-    </ul>
-  </tree>
+  <recursive ng-init="level = 0">
+    <div ng-repeat="item in arbre" class="tree-node">
+      <p>
+        {{ level }}
+        <input ng-model="item.name" class="form-control input-sm">
+        <button ng-click="arbre.splice($index, 1)" class="btn btn-default btn-xs">
+          Supprimer
+        </button>
+        <button ng-click="addChild(item)" class="btn btn-default btn-xs">
+          Ajouter un enfant
+        </button>
+      </p>
+      <call-recursive rebind="arbre = item.children; level = level + 1"></call-tree>
+    </div>
+  </recursive>
   
-  <hr>
+  <h2>Résultat</h2>
 
   <pre>{{ arbre | json }}</pre>
 

@@ -1,28 +1,29 @@
 'use strict';
 
 
-angular.module('tree', [])
-  .directive('tree', function ($compile) {
+angular.module('recursive', [])
+  .directive('recursive', function ($compile) {
     return {
       restrict: 'AE',
       controller: function () {
         this.template = null;
       },
       compile: function (element) {
+        // On ne prend que les éléments enfants pour ne pas appeler
+        // indéfiniment $compile et geler le navigateur
         var elementClone = element.children().clone();
         var compiled = $compile(elementClone);
         
         return function (scope, element, attrs, controller) {
           controller.template = compiled;
-          
         };
       }
     };
   })
-  .directive('callTree', function () {
+  .directive('callRecursive', function () {
     return {
       restrict: 'AE',
-      require: '^tree',
+      require: '^recursive',
       scope: true,
       compile: function (element, attrs) {
         if (angular.isUndefined(attrs.rebind)) {
