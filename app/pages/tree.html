@@ -4,19 +4,29 @@
   
   <h2>Arbre</h2>
   
+  <p>
+    <button ng-click="addParent()" class="btn btn-default">
+      <span class="glyphicon glyphicon-plus"></span>
+      Ajouter un nouvel élément
+    </button>
+  </p>
+  
+  <hr>
+  
   <recursive ng-init="level = 0">
-    <div ng-repeat="item in arbre" class="tree-node">
+    <div ng-repeat="item in arbre" class="tree-node form-inline">
       <p>
-        {{ level }}
         <input ng-model="item.name" class="form-control input-sm">
-        <button ng-click="arbre.splice($index, 1)" class="btn btn-default btn-xs">
-          Supprimer
-        </button>
         <button ng-click="addChild(item)" class="btn btn-default btn-xs">
+          <span class="glyphicon glyphicon-plus"></span>
           Ajouter un enfant
         </button>
+        <button ng-click="arbre.splice($index, 1)" class="btn btn-danger btn-xs">
+          <span class="glyphicon glyphicon-remove"></span>
+          Supprimer
+        </button>
       </p>
-      <call-recursive rebind="arbre = item.children; level = level + 1"></call-tree>
+      <call-recursive rebind="arbre = item.children"></call-tree>
     </div>
   </recursive>
   

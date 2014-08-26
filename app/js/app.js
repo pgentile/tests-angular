@@ -338,6 +338,13 @@ angular.module('tests', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'paginati
     $scope.x = 'XXX';
     $scope.elements = ['A', 'B', 'C'];
     
+    $scope.addParent = function () {
+      $scope.arbre.push({
+        name: 'New parent',
+        children: []
+      });
+    };
+    
     $scope.addChild = function (parent) {
       parent.children.push({
         name: 'New child',
