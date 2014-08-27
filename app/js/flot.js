@@ -32,7 +32,7 @@ angular.module('flot', ['events'])
             plot.setupGrid();
             plot.draw();
           };
-        }, 1);
+        });
       },
       templateUrl: '/templates/flot.html'
     };
