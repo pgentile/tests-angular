@@ -2,9 +2,14 @@
 
 
 angular.module('tests', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'pagination', 'recursive'])
-  .config(function ($logProvider) {
-    $logProvider.debugEnabled(false);
+  .constant('production', true)
+  .config(function ($logProvider, production) {
+    $logProvider.debugEnabled(production !== true);
   })
+  // TODO Activer quand AngularJS 1.3 sera sorti
+  // .config(function ($compileProvider, production) {
+  //   $compileProvider.debugInfoEnabled(production !== true);
+  // })
   .config(function ($locationProvider) {
     $locationProvider.hashPrefix('!');
   })
