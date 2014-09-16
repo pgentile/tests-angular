@@ -33,7 +33,6 @@ angular.module('recursive', [])
         return function (scope, element, attrs, controller) {
           // Toute la magie est ici : on écrase dans le scope descendant
           // la variable de scope sur laquelle appliquer la récursion.
-          // scope[attrs.varName] = scope.$eval(attrs.value);
           scope.$eval(attrs.rebind);
           
           controller.template(scope, function (cloned) {
