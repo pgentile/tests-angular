@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: './app',
-          src: ['r/**', 'images/**'],
+          src: ['r/**'],
           dest: './dist',
           filter: 'isFile'
         }]
@@ -76,6 +76,17 @@ module.exports = function(grunt) {
         src: 'dist/styles/styles.min.css'
       }
     },
+    imagemin: {
+      options: {
+        
+      },
+      dist: {
+        expand: true,
+        cwd: './app',
+        src: ['**/images/*.{gif,jpeg,jpg,jpe,png,svg}'],
+        dest: './dist'
+      }
+    },
     connect: {
       options: {
         port: 3000
@@ -98,15 +109,19 @@ module.exports = function(grunt) {
       },
       html: {
         files: ['app/**/*.html'],
-        tasks: ['htmlmin']
+        tasks: ['newer:htmlmin']
       },
       styles: {
         files: ['app/styles/**/*.less'],
         tasks: ['less', 'autoprefixer']
       },
+      images: {
+        files: ['app/images/**'],
+        tasks: ['newer:imagemin']
+      },
       other: {
-        files: ['app/r/**', 'app/images/**'],
-        tasks: ['copy']
+        files: ['app/r/**'],
+        tasks: ['newer:copy']
       },
     },
     karma: {
@@ -143,9 +158,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-protractor-runner');
   grunt.loadNpmTasks('grunt-karma');
-  
+  grunt.loadNpmTasks('grunt-contrib-imagemin');
+  grunt.loadNpmTasks('grunt-newer');
+
   grunt.registerTask('validate', ['jshint']);
-  grunt.registerTask('dist', ['clean', 'validate', 'copy', 'htmlmin', 'uglify', 'less', 'autoprefixer']);
+  grunt.registerTask('dist', [
+    'clean', 'validate', 'copy', 'imagemin',
+    'htmlmin', 'uglify', 'less', 'autoprefixer'
+  ]);
   grunt.registerTask('test', ['karma:unit', 'connect:server', 'protractor:e2e']);
   grunt.registerTask('dev', ['dist', 'connect:server', 'karma:watch', 'watch']);
   
