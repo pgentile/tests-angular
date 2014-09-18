@@ -25,7 +25,8 @@ angular.module('tests', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'paginati
     {
       name: 'Accueil',
       url: '/home',
-      templateUrl: 'pages/home.html'
+      templateUrl: 'pages/home.html',
+      default: true
     },
     {
       name: 'Trucs',
@@ -88,10 +89,11 @@ angular.module('tests', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'paginati
           templateUrl: page.templateUrl,
           controller: page.controller
         });
-      });
-      
-      $routeProvider.otherwise({
-        redirectTo: '/home'
+        if (page.default === true) {
+          $routeProvider.otherwise({
+            redirectTo: '/home'
+          });
+        }
       });
   })
   .controller('MainNavController', function ($scope, $log, $location, pages) {
