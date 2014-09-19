@@ -4,6 +4,9 @@
 @import "../../bower_components/bootstrap/less/bootstrap.less";
 @import "../../bower_components/bootstrap/less/theme.less";
 
+// Les variables sont déclarées après l'import de Bootstrap, afin
+// d'éviter que l'import écrase des variables déjà déclarées.
+
 // Modifier l'URL de base des fontes
 @icon-font-path: "/static/bootstrap/fonts/";
 
@@ -13,3 +16,4 @@
 @import "base.less";
 @import "events.less";
 @import "tree.less";
+@import "forms.less";

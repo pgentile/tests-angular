@@ -81,6 +81,12 @@ angular.module('tests', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'paginati
       url: '/tree',
       templateUrl: 'pages/tree.html',
       controller: 'TreeController'
+    },
+    {
+      name: 'Formulaire',
+      url: '/form',
+      templateUrl: 'pages/form.html',
+      controller: 'FormController'
     }
   ])
   .config(function ($routeProvider, pages) {
@@ -396,4 +402,7 @@ angular.module('tests', ['ngAnimate', 'ngRoute', 'tabs', 'd3', 'flot', 'paginati
         ]
       },
     ];
+  })
+  .controller('FormController', function () {
+    
   });
