@@ -110,7 +110,7 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: ['app/js/*.js', 'tests/unit/**/*.spec.js'],
-        tasks: ['validate', 'karma:watch:run', 'uglify']
+        tasks: ['validate', 'uglify']
       },
       html: {
         files: ['app/**/*.html'],
@@ -172,7 +172,7 @@ module.exports = function(grunt) {
     'htmlmin', 'uglify', 'less', 'autoprefixer'
   ]);
   grunt.registerTask('test', ['karma:unit', 'connect:server', 'protractor:e2e']);
-  grunt.registerTask('dev', ['dist', 'connect:server', 'karma:watch', 'watch']);
+  grunt.registerTask('dev', ['dist', 'connect:server', 'watch']);
   
   grunt.registerTask('default', ['dist']);
   
