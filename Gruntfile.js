@@ -11,7 +11,7 @@ module.exports = function(grunt) {
       dist: './dist'
     },
     jshint: {
-      files: ['Gruntfile.js', 'app/**/*.js'],
+      files: ['Gruntfile.js', 'app/js/*.js'],
       options: {
         jshintrc: 'jshintrc.json'
       }
@@ -52,7 +52,7 @@ module.exports = function(grunt) {
       },
       dist: {
         files: [{
-          src: ['app/**/*.js'],
+          src: ['app/js/*.js'],
           dest: 'dist/js/app.min.js'
         }]
       }
@@ -60,31 +60,36 @@ module.exports = function(grunt) {
     less: {
       options: {
         cleancss: true,
+        // Ne fonctionne pas avec plusieurs fichiers .less en entrée
+        // sourceMap: true,
+        // sourceMapFilename: 'dist/styles/styles.min.css.map',
+        // outputSourceFiles: true
       },
       dist: {
         files: [{
-          src: ['app/**/*.less'],
+          src: ['app/styles/*.less'],
           dest: 'dist/styles/styles.min.css'
         }]
       }
     },
     autoprefixer: {
       options: {
-        browsers: ['last 2 version']
+        browsers: ['last 3 version'],
+        // Pas de map correcte générée en entrée
+        // map: true
       },
       dist: {
         src: 'dist/styles/styles.min.css'
       }
     },
     imagemin: {
-      options: {
-        
-      },
       dist: {
-        expand: true,
-        cwd: './app',
-        src: ['**/images/*.{gif,jpeg,jpg,jpe,png,svg}'],
-        dest: './dist'
+        files: [{
+          expand: true,
+          cwd: './app',
+          src: ['images/**/*.{gif,jpeg,jpg,jpe,png,svg}'],
+          dest: './dist'
+        }]
       }
     },
     connect: {
@@ -104,7 +109,7 @@ module.exports = function(grunt) {
     },
     watch: {
       scripts: {
-        files: ['app/**/*.js', 'tests/unit/**/*.spec.js'],
+        files: ['app/js/*.js', 'tests/unit/**/*.spec.js'],
         tasks: ['validate', 'karma:watch:run', 'uglify']
       },
       html: {
@@ -112,7 +117,7 @@ module.exports = function(grunt) {
         tasks: ['newer:htmlmin']
       },
       styles: {
-        files: ['app/styles/**/*.less'],
+        files: ['app/styles/*.less'],
         tasks: ['less', 'autoprefixer']
       },
       images: {
