@@ -13,7 +13,7 @@
   
   <hr>
   
-  <recursive ng-init="level = 0">
+  <recursive>
     <div ng-repeat="item in arbre" class="tree-node form-inline">
       <p>
         <input ng-model="item.name" class="form-control input-sm">
@@ -26,7 +26,7 @@
           Supprimer
         </button>
       </p>
-      <call-recursive rebind="arbre = item.children"></call-tree>
+      <call-recursive rebind="arbre = item.children"></call-recursive>
     </div>
   </recursive>
   
