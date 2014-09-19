@@ -60,14 +60,13 @@ module.exports = function(grunt) {
     less: {
       options: {
         cleancss: true,
-        // Ne fonctionne pas avec plusieurs fichiers .less en entrée
-        // sourceMap: true,
-        // sourceMapFilename: 'dist/styles/styles.min.css.map',
-        // outputSourceFiles: true
+        sourceMap: true,
+        sourceMapFilename: 'dist/styles/styles.min.css.map',
+        outputSourceFiles: true
       },
       dist: {
         files: [{
-          src: ['app/styles/*.less'],
+          src: 'app/styles/styles.less',
           dest: 'dist/styles/styles.min.css'
         }]
       }
