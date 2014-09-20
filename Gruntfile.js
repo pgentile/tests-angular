@@ -52,7 +52,7 @@ module.exports = function(grunt) {
       },
       dist: {
         files: [{
-          src: ['app/js/*.js'],
+          src: ['app/js/**/*.js'],
           dest: 'dist/js/app.min.js'
         }]
       }
@@ -108,7 +108,7 @@ module.exports = function(grunt) {
     },
     watch: {
       scripts: {
-        files: ['app/js/*.js', 'tests/unit/**/*.spec.js'],
+        files: ['app/js/**/*.js', 'tests/unit/**/*.spec.js'],
         tasks: ['validate', 'uglify']
       },
       html: {
@@ -116,7 +116,7 @@ module.exports = function(grunt) {
         tasks: ['newer:htmlmin']
       },
       styles: {
-        files: ['app/styles/*.less'],
+        files: ['app/styles/**/*.less'],
         tasks: ['less', 'autoprefixer']
       },
       images: {
