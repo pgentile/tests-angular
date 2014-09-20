@@ -151,19 +151,7 @@ module.exports = function(grunt) {
     }
   });
   
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-htmlmin');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-autoprefixer');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-protractor-runner');
-  grunt.loadNpmTasks('grunt-karma');
-  grunt.loadNpmTasks('grunt-contrib-imagemin');
-  grunt.loadNpmTasks('grunt-newer');
+  require('load-grunt-tasks')(grunt);
 
   grunt.registerTask('validate', ['jshint']);
   grunt.registerTask('dist', [
