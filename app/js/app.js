@@ -31,6 +31,30 @@ angular.module(
       default: true
     },
     {
+      name: 'Angular classique',
+      group: true,
+      subPages: [
+        {
+          name: 'Graphes',
+          url: '/graphs',
+          templateUrl: 'pages/graphs.html',
+          controller: 'GraphController'
+        },
+        {
+          name: 'Formulaire',
+          url: '/form',
+          templateUrl: 'pages/form.html',
+          controller: 'FormController'
+        },
+        {
+          name: 'Evénements',
+          url: '/events',
+          templateUrl: 'pages/events.html',
+          controller: 'EventWatcherController'
+        }
+      ]
+    },
+    {
       name: 'Intégration',
       group: true,
       subPages: [
@@ -61,18 +85,6 @@ angular.module(
       ]
     },
     {
-      name: 'Graphes',
-      url: '/graphs',
-      templateUrl: 'pages/graphs.html',
-      controller: 'GraphController'
-    },
-    {
-      name: 'Evénements',
-      url: '/events',
-      templateUrl: 'pages/events.html',
-      controller: 'EventWatcherController'
-    },
-    {
       name: 'Resize',
       url: '/resize',
       templateUrl: 'pages/resize.html',
@@ -89,12 +101,6 @@ angular.module(
       url: '/tree',
       templateUrl: 'pages/tree.html',
       controller: 'TreeController'
-    },
-    {
-      name: 'Formulaire',
-      url: '/form',
-      templateUrl: 'pages/form.html',
-      controller: 'FormController'
     }
   ])
   .config(function ($routeProvider, pages) {
