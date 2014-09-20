@@ -99,7 +99,7 @@ angular.module(
         });
         if (page.default === true) {
           $routeProvider.otherwise({
-            redirectTo: '/home'
+            redirectTo: page.url
           });
         }
       });
