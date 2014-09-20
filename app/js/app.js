@@ -31,10 +31,34 @@ angular.module(
       default: true
     },
     {
-      name: 'Trucs',
-      url: '/trucs',
-      templateUrl: 'pages/trucs.html',
-      controller: 'TrucsController'
+      name: 'Intégration',
+      group: true,
+      subPages: [
+        {
+          name: 'Trucs',
+          url: '/trucs',
+          templateUrl: 'pages/trucs.html',
+          controller: 'TrucsController'
+        },
+        {
+          name: 'D3',
+          url: '/d3',
+          templateUrl: 'pages/d3.html',
+          controller: 'D3Controller'
+        },
+        {
+          name: 'Flot',
+          url: '/flot',
+          templateUrl: 'pages/flot.html',
+          controller: 'FlotController'
+        },
+        {
+          name: 'Pagination',
+          url: '/pagination',
+          templateUrl: 'pages/pagination.html',
+          controller: 'PaginationController'
+        }
+      ]
     },
     {
       name: 'Graphes',
@@ -49,28 +73,10 @@ angular.module(
       controller: 'EventWatcherController'
     },
     {
-      name: 'D3',
-      url: '/d3',
-      templateUrl: 'pages/d3.html',
-      controller: 'D3Controller'
-    },
-    {
-      name: 'Flot',
-      url: '/flot',
-      templateUrl: 'pages/flot.html',
-      controller: 'FlotController'
-    },
-    {
       name: 'Resize',
       url: '/resize',
       templateUrl: 'pages/resize.html',
       controller: 'ResizeController'
-    },
-    {
-      name: 'Pagination',
-      url: '/pagination',
-      templateUrl: 'pages/pagination.html',
-      controller: 'PaginationController'
     },
     {
       name: 'Erreurs',
@@ -92,7 +98,7 @@ angular.module(
     }
   ])
   .config(function ($routeProvider, pages) {
-      angular.forEach(pages, function (page) {
+      var registerPage = function (page) {
         $routeProvider.when(page.url, {
           templateUrl: page.templateUrl,
           controller: page.controller
@@ -102,19 +108,31 @@ angular.module(
             redirectTo: page.url
           });
         }
+      };
+    
+      angular.forEach(pages, function (page) {
+        if (page.group === true) {
+          angular.forEach(page.subPages, registerPage);
+        }
+        else {
+          registerPage(page);
+        }
       });
   })
   .controller('MainNavController', function ($scope, $log, $location, pages) {
-    $scope.pages = [];
-    angular.forEach(pages, function (page) {
-      $scope.pages.push({
-        name: page.name,
-        url: page.url
-      });
-    });
+    $scope.pages = pages;
     
-    $scope.isActive = function (routeName) {
-      return $location.path() === routeName;
+    $scope.isActive = function (page) {
+      if (page.group === true) {
+        var subPageFound = false;
+        
+        angular.forEach(page.subPages, function (subPage) {
+          subPageFound = subPageFound || $location.path() === subPage.url;
+        });
+        
+        return subPageFound;
+      }
+      return $location.path() === page.url;
     };
     
     $scope.$on('$routeChangeSuccess', function () {
