@@ -9,7 +9,7 @@ angular.module(
     // Pages
     'testsGraphs', 'testsD3', 'testsErrors', 'testsEvents',
     'testsFlot', 'testsForm', 'testsHome', 'testsPagination',
-    'testResize', 'testsTree', 'testsTrucs'
+    'testWindowEvents', 'testsTree', 'testsTrucs'
   ]
 )
   .constant('production', true)
@@ -85,10 +85,10 @@ angular.module(
       ]
     },
     {
-      name: 'Resize',
-      url: '/resize',
-      templateUrl: 'pages/resize.html',
-      controller: 'ResizeController'
+      name: 'Evénements fenêtre',
+      url: '/window-events',
+      templateUrl: 'pages/window-events.html',
+      controller: 'WindowEventsController'
     },
     {
       name: 'Erreurs',

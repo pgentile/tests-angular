@@ -1,0 +1,11 @@
+<div ng-controller="EventController" window-resize="event = $event" window-scroll="event = $event">
+  
+  <h1>Evénements DOM</h1>
+
+  <p>
+    <button class="btn btn-default" ng-click="event = $event">Cliquer ici</button>
+  </p>
+
+  <p>Type d'événement reçu : <code>{{ event.type }}</code></p>
+
+</div>
