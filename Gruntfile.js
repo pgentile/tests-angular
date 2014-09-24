@@ -74,8 +74,9 @@ module.exports = function(grunt) {
     autoprefixer: {
       options: {
         browsers: ['last 3 version'],
-        // Pas de map correcte générée en entrée
-        // map: true
+        map: {
+          sourceContent: true
+        }
       },
       dist: {
         src: 'dist/styles/styles.min.css'
