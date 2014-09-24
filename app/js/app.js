@@ -12,7 +12,7 @@ angular.module(
     'testWindowEvents', 'testsTree', 'testsTrucs'
   ]
 )
-  .constant('production', true)
+  .constant('production', false)
   .config(function ($logProvider, production) {
     $logProvider.debugEnabled(production !== true);
   })

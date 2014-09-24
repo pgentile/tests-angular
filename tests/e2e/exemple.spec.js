@@ -6,9 +6,13 @@ var util = require('util');
 function BasePage() {
   var navBar = element(by.css('nav'));
   
-  this.open = function (text) {
-    browser.get('');
-    navBar.element(by.cssContainingText('a', text)).click();
+  this.open = function () {
+    browser.get(''); // TODO Ne pas le faire à chaque test
+    
+    for (var i = 0; i < arguments.length; i++) {
+      var text = arguments[i];
+      navBar.element(by.cssContainingText('a', text)).click();
+    }
   };
   
   this.getTitle = function () {
@@ -108,14 +112,14 @@ describe('Tests AngularJS', function () {
   
   it('doit naviguer sur la page des trucs', function () {
     var page = new TrucsPage();
-    page.open('Trucs');
+    page.open('Intégration', 'Trucs');
 
     expect(page.getTitle()).toEqual('Tabs avec Bootstrap');
   });
   
   it('doit naviguer sur la pagination', function () {
     var page = new PaginationPage();
-    page.open('Pagination');
+    page.open('Intégration', 'Pagination');
     
     expect(page.getTitle()).toEqual('Pagination');
   });
