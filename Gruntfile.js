@@ -11,7 +11,7 @@ module.exports = function(grunt) {
       dist: './dist'
     },
     jshint: {
-      files: ['Gruntfile.js', 'app/js/*.js'],
+      files: ['Gruntfile.js', 'app/js/**/*.js'],
       options: {
         jshintrc: 'jshintrc.json'
       }
