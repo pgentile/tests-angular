@@ -16,10 +16,9 @@ angular.module(
   .config(function ($logProvider, production) {
     $logProvider.debugEnabled(production !== true);
   })
-  // TODO Activer quand AngularJS 1.3 sera sorti
-  // .config(function ($compileProvider, production) {
-  //   $compileProvider.debugInfoEnabled(production !== true);
-  // })
+  .config(function ($compileProvider, production) {
+    $compileProvider.debugInfoEnabled(production !== true);
+  })
   .config(function ($locationProvider) {
     $locationProvider.hashPrefix('!');
   })

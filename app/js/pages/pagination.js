@@ -8,14 +8,12 @@ angular.module('testsPagination', ['pagination'])
     $scope.itemsPerPage = 10;
     
     var maxPageForItems = $filter('maxPageForItems');
-    // TODO Utiliser scope.$watchGroup avec Angular 1.3
-    angular.forEach(['count', 'itemsPerPage'], function (expr) {
-      $scope.$watch(expr, function () {
-        var maxPage = maxPageForItems($scope.count, $scope.itemsPerPage);
-        if ($scope.currentPage > maxPage) {
-          $scope.currentPage = maxPage;
-        }
-      });
+
+    $scope.$watchGroup(['count', 'itemsPerPage'], function () {
+      var maxPage = maxPageForItems($scope.count, $scope.itemsPerPage);
+      if ($scope.currentPage > maxPage) {
+        $scope.currentPage = maxPage;
+      }
     });
     
     $scope.loadPage = function (page) {

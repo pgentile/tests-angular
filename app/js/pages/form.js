@@ -27,12 +27,12 @@ angular.module('testsForm', [])
           controllerNameIndex++;
           scope[controllerName] = inputController;
           
-          // TODO Utiliser scope.$watchGroup avec Angular 1.3
-          angular.forEach(['$invalid', '$dirty'], function (fieldName) {
-            scope.$watch(controllerName + '.' + fieldName, function () {
-              formGroupElem.toggleClass('has-error', inputController.$dirty && inputController.$invalid);
-              formGroupElem.toggleClass('has-success', inputController.$dirty && inputController.$valid);
-            });
+          var stateProps = ['$invalid', '$dirty'].map(function (value) {
+            return controllerName + '.' + value;
+          });
+          scope.$watchGroup(stateProps, function () {
+            formGroupElem.toggleClass('has-error', inputController.$dirty && inputController.$invalid);
+            formGroupElem.toggleClass('has-success', inputController.$dirty && inputController.$valid);
           });
         });
       }
