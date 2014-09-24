@@ -1,12 +1,18 @@
 <div>
   <h1>Formulaires</h1>
   
-  <form novalidate name="testForm">
+  <form novalidate name="testForm" show-errors>
   
     <div class="form-group">
       <label for="email">Adresse email</label>
       <input type="email" required class="form-control" id="email" ng-model="email">
     </div>
+    
+    <div class="form-group">
+      <label for="email2">Adresse email</label>
+      <input type="email" required class="form-control" id="email2" ng-model="email2">
+    </div>
+    
     <button type="submit" class="btn btn-primary">Envoyer</button>
     <button type="reset" class="btn btn-default" ng-click="testForm.$setPristine()">Réinitialiser</button>
     
