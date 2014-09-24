@@ -100,6 +100,7 @@ module.exports = function(grunt) {
         options: {
           middleware: function (connect) {
             return [
+              require('connect-livereload')(),
               connect().use('/static', connect.static('./bower_components')),
               connect.static('./dist')
             ];
@@ -108,6 +109,9 @@ module.exports = function(grunt) {
       }
     },
     watch: {
+      options: {
+        livereload: true,
+      },
       scripts: {
         files: ['app/js/**/*.js', 'tests/unit/**/*.spec.js'],
         tasks: ['validate', 'uglify']
