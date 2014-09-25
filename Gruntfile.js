@@ -87,8 +87,24 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: './app',
-          src: ['images/**/*.{gif,jpeg,jpg,jpe,png,svg}'],
+          src: ['images/**/*.{gif,jpeg,jpg,png,svg}'],
           dest: './dist'
+        }]
+      }
+    },
+    compress: {
+      options: {
+        mode: 'gzip'
+      },
+      dist: {
+        files: [{
+          expand: true,
+          cwd: './dist',
+          src: ['**/*.{html,css,js}'],
+          dest: './dist',
+          rename: function (dest, src) {
+            return dest + '/' + src + '.gz';
+          }
         }]
       }
     },
@@ -99,10 +115,13 @@ module.exports = function(grunt) {
       server: {
         options: {
           middleware: function (connect) {
+            var gzipStatic = require('connect-gzip-static');
+            var livereload = require('connect-livereload');
+            
             return [
-              require('connect-livereload')(), // TODO Ne fonctionne pas avec les tests Firefox
-              connect().use('/static', connect.static('./bower_components')),
-              connect.static('./dist')
+              livereload(), // TODO Ne fonctionne pas avec les tests Firefox
+              connect().use('/static', gzipStatic('./bower_components')),
+              gzipStatic('./dist')
             ];
           }
         }
@@ -113,19 +132,23 @@ module.exports = function(grunt) {
         livereload: true,
       },
       scripts: {
-        files: ['app/js/**/*.js', 'tests/unit/**/*.spec.js'],
-        tasks: ['validate', 'uglify']
+        files: ['app/js/**/*.js'],
+        tasks: ['validate', 'uglify', 'newer:compress']
+      },
+      testScripts: {
+        files: ['tests/unit/**/*.spec.js'],
+        tasks: ['validate']
       },
       html: {
         files: ['app/**/*.html'],
-        tasks: ['newer:htmlmin']
+        tasks: ['newer:htmlmin', 'newer:compress']
       },
       styles: {
         files: ['app/styles/**/*.less'],
-        tasks: ['less', 'autoprefixer']
+        tasks: ['less', 'autoprefixer', 'newer:compress']
       },
       images: {
-        files: ['app/images/**'],
+        files: ['app/images/**.{gif,jpeg,jpg,png,svg}'],
         tasks: ['newer:imagemin']
       },
       other: {
@@ -161,7 +184,8 @@ module.exports = function(grunt) {
   grunt.registerTask('validate', ['jshint']);
   grunt.registerTask('dist', [
     'clean', 'validate', 'copy', 'imagemin',
-    'htmlmin', 'uglify', 'less', 'autoprefixer'
+    'htmlmin', 'uglify', 'less', 'autoprefixer',
+    'compress'
   ]);
   grunt.registerTask('test', ['karma:unit', 'connect:server', 'protractor:e2e']);
   grunt.registerTask('dev', ['dist', 'connect:server', 'watch']);
