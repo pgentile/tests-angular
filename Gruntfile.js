@@ -100,7 +100,7 @@ module.exports = function(grunt) {
         options: {
           middleware: function (connect) {
             return [
-              require('connect-livereload')(),
+              require('connect-livereload')(), // TODO Ne fonctionne pas avec les tests Firefox
               connect().use('/static', connect.static('./bower_components')),
               connect.static('./dist')
             ];
