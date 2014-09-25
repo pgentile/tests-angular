@@ -33,7 +33,7 @@ module.exports = function(grunt) {
         conservativeCollapse: true,
         collapseBooleanAttributes: false, // Provoque des bugs avec AngularJS
         removeCommentsFromCDATA: true,
-        removeOptionalTags: true
+        removeComments: true
       },
       dist: {
         files: [{
