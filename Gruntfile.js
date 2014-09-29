@@ -100,7 +100,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: './dist',
-          src: ['**/*.{html,css,js}'],
+          src: ['**/*.{html,css,js,svg}'],
           dest: './dist',
           rename: function (dest, src) {
             return dest + '/' + src + '.gz';
