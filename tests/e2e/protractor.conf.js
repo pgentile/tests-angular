@@ -1,4 +1,4 @@
-'usr strict';
+'use strict';
 
 exports.config = {
   // chromeOnly: true,  // Tests seulement sur Google Chrome (pas de Selenium impliqué)
