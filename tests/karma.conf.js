@@ -3,7 +3,7 @@
 module.exports = function(config){
   config.set({
 
-    basePath : '../../',
+    basePath : '../',
 
     files : [
       'bower_components/jquery/dist/jquery.js',
@@ -15,7 +15,7 @@ module.exports = function(config){
       'bower_components/flot/jquery.flot.js',
       'bower_components/jasmine-jquery/lib/jasmine-jquery.js',
       'app/js/**/*.js',
-      'tests/unit/**/*.spec.js',
+      'tests/unit/**/*.js',
     ],
 
     frameworks: ['jasmine'],

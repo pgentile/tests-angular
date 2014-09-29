@@ -158,7 +158,7 @@ module.exports = function(grunt) {
     },
     karma: {
       options: {
-        configFile: 'tests/unit/karma.conf.js'
+        configFile: 'tests/karma.conf.js'
       },
       unit: {
         singleRun: true
@@ -170,7 +170,7 @@ module.exports = function(grunt) {
     protractor: {
       e2e: {
         options: {
-          configFile: 'tests/e2e/protractor.conf.js',
+          configFile: 'tests/protractor.conf.js',
           args: {
             baseUrl: 'http://localhost:3000'
           }
