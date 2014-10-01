@@ -144,7 +144,7 @@ module.exports = function(grunt) {
         tasks: ['newer:htmlmin', 'newer:compress']
       },
       styles: {
-        files: ['app/styles/**/*.less'],
+        files: ['app/styles/**/*.{less,css}'],
         tasks: ['less', 'autoprefixer', 'newer:compress']
       },
       images: {
