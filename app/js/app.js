@@ -129,14 +129,11 @@ angular.module(
     
     $scope.isActive = function (page) {
       if (page.group === true) {
-        var subPageFound = false;
-        
-        angular.forEach(page.subPages, function (subPage) {
-          subPageFound = subPageFound || $location.path() === subPage.url;
+        return page.subPages.some(function (subPage) {
+          return $location.path() === subPage.url;
         });
-        
-        return subPageFound;
       }
+      
       return $location.path() === page.url;
     };
     
