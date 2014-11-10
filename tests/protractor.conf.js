@@ -8,12 +8,9 @@ exports.config = {
     {
       browserName: 'chrome'
     },
-    // {
-    //   browserName: 'firefox'
-    // },
-    // {
-    //   browserName: 'safari'
-    // }
+    {
+      browserName: 'firefox'
+    }
   ],
   maxSessions: 1
 };
