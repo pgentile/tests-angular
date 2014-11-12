@@ -16,6 +16,13 @@ module.exports = function(grunt) {
         jshintrc: 'jshintrc.json'
       }
     },
+    bootlint: {
+      options: {
+        stoponerror: false,
+        relaxerror: []
+      },
+      files: ['app/index.html'],
+    },
     copy: {
       dist: {
         files: [{
@@ -133,11 +140,11 @@ module.exports = function(grunt) {
       },
       scripts: {
         files: ['app/js/**/*.js'],
-        tasks: ['validate', 'uglify', 'newer:compress']
+        tasks: ['newer:jshint', 'uglify', 'newer:compress']
       },
       testScripts: {
         files: ['tests/unit/**/*.spec.js'],
-        tasks: ['validate']
+        tasks: ['newer:jshint']
       },
       html: {
         files: ['app/**/*.html'],
@@ -181,7 +188,7 @@ module.exports = function(grunt) {
   
   require('load-grunt-tasks')(grunt);
 
-  grunt.registerTask('validate', ['jshint']);
+  grunt.registerTask('validate', ['jshint', 'bootlint']);
   grunt.registerTask('dist', [
     'clean', 'validate', 'copy', 'imagemin',
     'htmlmin', 'uglify', 'less', 'autoprefixer',
