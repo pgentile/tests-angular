@@ -13,11 +13,10 @@
     "angular-route": "^1.3",
     "d3": "^3.4.11",
     "flot": "^0.8.3",
-    "bootstrap": "^3.2.0"
+    "bootstrap": "^3.3.0"
   },
   "devDependencies": {
     "angular-mocks": "^1.3",
-    "jasmine-jquery": "~2.0.5",
-    "bootswatch": "~3.2.0"
+    "jasmine-jquery": "~2.0.5"
   }
 }
