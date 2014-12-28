@@ -12,6 +12,7 @@
     <script src="/static/angular-route/angular-route.min.js"></script>
     <script src="/static/flot/jquery.flot.js"></script>
     <script src="/static/d3/d3.min.js"></script>
+    <script src="/static/moment/min/moment-with-locales.min.js"></script>
     <script src="/js/app.min.js"></script>
   </head>
   <body ng-app="tests">
@@ -32,14 +33,14 @@
         <div class="collapse navbar-collapse" id="navbar-collapse">
           <ul class="nav navbar-nav">
             <li ng-repeat="page in ::pages" ng-class="{ active: isActive(page), dropdown: page.group }">
-                <a class="dropdown-toggle" data-toggle="dropdown" ng-if="page.group">
-                  {{ ::page.name }}
-                  <span class="caret" ng-if="page.group"></span>
-                </a>
-                <a ng-href="#!{{ ::page.url }}" ng-if="!page.group">
+                <a ng-href="#!{{ ::page.url }}" ng-if="!(page | hasSubPages)">
                   {{ ::page.name }}
                 </a>
-                <ul class="dropdown-menu" role="menu" ng-if="page.group">
+                <a class="dropdown-toggle" data-toggle="dropdown" ng-if="page | hasSubPages">
+                  {{ ::page.name }}
+                  <span class="caret" ng-if="page | hasSubPages"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu" ng-if="page | hasSubPages">
                   <li ng-repeat="subPage in ::page.subPages" ng-class="{ active: isActive(subPage) }">
                     <a ng-href="#!{{ ::subPage.url }}">{{ ::subPage.name }}</a>
                   </li>

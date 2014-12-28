@@ -31,7 +31,6 @@ angular.module(
     },
     {
       name: 'Angular classique',
-      group: true,
       subPages: [
         {
           name: 'Graphes',
@@ -55,7 +54,6 @@ angular.module(
     },
     {
       name: 'Intégration',
-      group: true,
       subPages: [
         {
           name: 'Trucs',
@@ -103,32 +101,37 @@ angular.module(
     }
   ])
   .config(function ($routeProvider, pages) {
-      var registerPage = function (page) {
-        $routeProvider.when(page.url, {
-          templateUrl: page.templateUrl,
-          controller: page.controller
-        });
-        if (page.default === true) {
-          $routeProvider.otherwise({
-            redirectTo: page.url
-          });
-        }
-      };
-    
-      angular.forEach(pages, function (page) {
-        if (page.group === true) {
-          angular.forEach(page.subPages, registerPage);
-        }
-        else {
-          registerPage(page);
-        }
+    var registerPage = function (page) {
+      $routeProvider.when(page.url, {
+        templateUrl: page.templateUrl,
+        controller: page.controller
       });
+      if (page.default === true) {
+        $routeProvider.otherwise({
+          redirectTo: page.url
+        });
+      }
+    };
+
+    angular.forEach(pages, function (page) {
+      if (angular.isArray(page.subPages)) {
+        angular.forEach(page.subPages, registerPage);
+      }
+      else {
+        registerPage(page);
+      }
+    });
+  })
+  .filter('hasSubPages', function () {
+    return function (page) {
+      return angular.isArray(page.subPages);
+    };
   })
   .controller('MainNavController', function ($scope, $log, $location, pages) {
     $scope.pages = pages;
     
     $scope.isActive = function (page) {
-      if (page.group === true) {
+      if (angular.isArray(page.subPages)) {
         return page.subPages.some(function (subPage) {
           return $location.path() === subPage.url;
         });
