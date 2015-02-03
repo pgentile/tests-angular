@@ -9,7 +9,7 @@ angular.module(
     // Pages
     'testsGraphs', 'testsD3', 'testsErrors', 'testsEvents',
     'testsFlot', 'testsForm', 'testsHome', 'testsPagination',
-    'testWindowEvents', 'testsTree', 'testsTrucs'
+    'testWindowEvents', 'testsTree', 'testsTrucs', 'testsModal'
   ]
 )
   .constant('production', false)
@@ -78,6 +78,12 @@ angular.module(
           url: '/pagination',
           templateUrl: 'pages/pagination.html',
           controller: 'PaginationController'
+        },
+        {
+          name: 'Modal',
+          url: '/modal',
+          templateUrl: 'pages/modal.html',
+          controller: 'ModalController'
         }
       ]
     },

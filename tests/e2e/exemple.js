@@ -60,9 +60,11 @@ function AccueilPage() {
   };
   
   this.dismissAndReadAlert = function () {
-    var alert = browser.switchTo().alert();
-    var accepted = alert.accept();
-    return alert.getText();
+    var text = $('div.modal .modal-body').getText();
+    
+    $('div.modal button.close').click();
+
+    return text;
   };
   
 }
