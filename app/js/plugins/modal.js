@@ -2,7 +2,7 @@
 
 
 angular.module('modal', [])
-  .factory('modal', function ($log, $templateRequest, $rootScope, $document, $compile, $timeout) {
+  .factory('modal', function ($log, $templateRequest, $rootScope, $document, $compile) {
     var templateUrl = '/templates/modal.html';
     
     var template = $templateRequest(templateUrl)
@@ -34,9 +34,7 @@ angular.module('modal', [])
               scope.$destroy();
             });
 
-            $timeout(function () {
-              clone.modal();
-            });
+            clone.modal();
           });
         });
       }
