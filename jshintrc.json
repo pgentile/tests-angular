@@ -4,7 +4,7 @@
   "unused": true,
   "strict": true,
   "esnext": true,
-  "bitwise": true,
+  "bitwise": false,
   "camelcase": true,
   "curly": true,
   "eqeqeq": true,

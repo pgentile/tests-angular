@@ -10,7 +10,7 @@ angular.module(
     'testsGraphs', 'testsD3', 'testsErrors', 'testsEvents',
     'testsFlot', 'testsForm', 'testsHome', 'testsPagination',
     'testWindowEvents', 'testsTree', 'testsTrucs', 'testsModal',
-    'testsDownloads'
+    'testsDownloads', 'testsTasks'
   ]
 )
   .constant('production', false)
@@ -111,6 +111,12 @@ angular.module(
       url: '/tree',
       templateUrl: 'pages/tree.html',
       controller: 'TreeController'
+    },
+    {
+      name: 'Tasks',
+      url: '/tasks',
+      templateUrl: 'pages/tasks.html',
+      controller: 'TasksController'
     }
   ])
   .config(function ($routeProvider, pages) {
