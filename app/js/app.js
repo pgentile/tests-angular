@@ -9,7 +9,8 @@ angular.module(
     // Pages
     'testsGraphs', 'testsD3', 'testsErrors', 'testsEvents',
     'testsFlot', 'testsForm', 'testsHome', 'testsPagination',
-    'testWindowEvents', 'testsTree', 'testsTrucs', 'testsModal'
+    'testWindowEvents', 'testsTree', 'testsTrucs', 'testsModal',
+    'testsDownloads'
   ]
 )
   .constant('production', false)
@@ -84,6 +85,12 @@ angular.module(
           url: '/modal',
           templateUrl: 'pages/modal.html',
           controller: 'ModalController'
+        },
+        {
+          name: 'Downloads',
+          url: '/downloads',
+          templateUrl: 'pages/downloads.html',
+          controller: 'DownloadsController'
         }
       ]
     },
