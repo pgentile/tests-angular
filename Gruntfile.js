@@ -34,6 +34,14 @@ module.exports = function(grunt) {
         }]
       }
     },
+    concat: {
+      js: {
+        files: [{
+          src: ['app/js/**/*.js'],
+          dest: 'dist/js/app.js'
+        }]
+      }
+    },
     htmlmin: {
       options: {
         collapseWhitespace: true,
@@ -140,7 +148,7 @@ module.exports = function(grunt) {
       },
       scripts: {
         files: ['app/js/**/*.js'],
-        tasks: ['newer:jshint', 'uglify', 'newer:compress']
+        tasks: ['concat:js', 'newer:jshint', 'uglify', 'newer:compress']
       },
       testScripts: {
         files: ['tests/unit/**/*.spec.js'],
@@ -191,7 +199,7 @@ module.exports = function(grunt) {
   grunt.registerTask('validate', ['jshint', 'bootlint']);
   grunt.registerTask('dist', [
     'clean', 'validate', 'copy', 'imagemin',
-    'htmlmin', 'uglify', 'less', 'autoprefixer',
+    'htmlmin', 'uglify', 'concat:js', 'less', 'autoprefixer',
     'compress'
   ]);
   grunt.registerTask('test', ['karma:unit', 'connect:server', 'protractor:e2e']);

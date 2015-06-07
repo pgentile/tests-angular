@@ -4,7 +4,21 @@
   
   <p>
     <button class="btn btn-default" ng-click="createTask()">Créer une nouvelle tâche</button>
+    <button class="btn btn-default" ng-click="exportTasks()">Exporter les tâches</button>
   </p>
+  
+  <hr>
+  
+  <form>
+    <div class="form-group">
+      <label for="file">Fichier à importer</label>
+      <input type="file" ng-file-select ng-model="fileToImport" id="file" name="file">
+    </div>
+    <button type="submit" class="btn btn-default" ng-click="importTasks(fileToImport)">Importer</button>
+  
+  </form>
+  
+  <hr>
 
   <table class="table">
     <thead>

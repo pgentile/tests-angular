@@ -2,5 +2,88 @@
 
   <h1>One task <small>{{ task.id }}</small></h1>
   <h2>{{ task.title }}</h2>
+  
+  <hr>
+  
+  <p class="btn-group" role="group">
+    <button type="button" class="btn btn-default" ng-click="workOn()">Work on</button>
+    <button type="button" class="btn btn-default" ng-click="close()">Close</button>
+    <button type="button" class="btn btn-default" ng-click="reject()">Reject</button>
+  </p>
+  
+  <hr>
+  
+  <div ng-if="task.content">
+    <p>{{ task.content }}</p>
+  </div>
+  
+  <ul class="list-inline">
+    <li><b>Date de création :</b> {{ task.createdAt }}</li>
+    <li><b>Date de modification :</b> {{ task.modifiedAt }}</li>
+    <li><b>Statut :</b> {{ task.status }}</li>
+    <li ng-if="task.currentAssignee"><b>Assignée à :</b> {{ task.currentAssignee }}</li>
+  </ul>
+  
+  <div ng-if="task.previousAssignments.length > 0">
+  
+    <hr>
+  
+    <h3>Assignations précédentes</h3>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Assigné</th>
+          <th>Date de changement</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="previousAssignment in task.previousAssignments">
+          <td>{{ previousAssignment.assignee }}</td>
+          <td>{{ previousAssignment.changeDate }}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+  </div>
+    
+  <div>
+  
+    <hr>
+  
+    <h3>Commentaires</h3>
+  
+    <div ng-repeat="comment in comments" class="panel panel-default">
+      <div class="panel-body">
+      
+        <h4>{{ comment.title }}</h4>
+        <p>{{ comment.content }}</p>
+      
+        <ul class="list-inline">
+          <li><b>Date de création :</b> {{ comment.createdAt }}</li>
+          <li><b>Auteur :</b> {{ comment.author }}</li>
+        </ul>
+      
+      </div>
+    </div>
+    
+    <h4>Ajouter un commentaire</h4>
+    
+    <form>
+      
+      <div class="form-group">
+        <label for="comment-content">Contenu</label>
+        <textarea id="comment-content" class="form-control" rows="3" ng-model="commentContent"></textarea>
+      </div>
+      
+      <div class="form-group">
+        <button type="submit" class="btn btn-default" ng-click="addComment(commentContent)">
+          Ajouter le commentaire
+        </button>
+      </div>
+      
+    </form>
+    
+  </div>
 
 </div>
