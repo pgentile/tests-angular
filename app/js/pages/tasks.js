@@ -1,8 +1,14 @@
 'use strict';
 
 
-angular.module('testsTasks', ['ngResource', 'angularFileUpload'])
-  .config(function ($httpProvider, $rootScope, $q) {
+angular.module('testsTasks', ['ngResource', 'ngFileUpload'])
+  .config(function ($routeProvider) {
+    $routeProvider.when('/tasks/:id', {
+      templateUrl: 'pages/task.html',
+      controller: 'OneTaskController'
+    });
+  })
+  .config(function ($httpProvider) {
     // TODO Rendre la config de la Basic Auth dynamique
     $httpProvider.defaults.headers.common.Authorization = 'Basic YWRtaW46cGFzc3dvcmQ=';
     
@@ -26,7 +32,11 @@ angular.module('testsTasks', ['ngResource', 'angularFileUpload'])
       };
     });
     
-    $httpProvider.interceptors.push(function () {
+  })
+  /*
+  .run(function ($http, $rootScope, $q) {
+    
+    $http.interceptors.push(function () {
       return {
         requestError: function (rejection) {
           $rootScope.$broadcast('exceptionCaught', {
@@ -39,14 +49,9 @@ angular.module('testsTasks', ['ngResource', 'angularFileUpload'])
     });
     
   })
-  .config(function ($routeProvider) {
-    $routeProvider.when('/tasks/:id', {
-      templateUrl: 'pages/task.html',
-      controller: 'OneTaskController'
-    });
-  })
+  */
   .constant('taskBaseURL', 'http://localhost:8080')
-  .controller('TasksController', function ($scope, $resource, $upload, $window, $log, taskBaseURL) {
+  .controller('TasksController', function ($scope, $resource, $window, $log, Upload, taskBaseURL) {
     
     var Tasks = $resource(taskBaseURL + '/tasks');
     
@@ -74,7 +79,7 @@ angular.module('testsTasks', ['ngResource', 'angularFileUpload'])
     $scope.importTasks = function (file) {
       $log.info('Uploading file' , file);
       
-      $upload.upload({
+      Upload.upload({
         url: taskBaseURL + '/tasks/import',
         method: 'POST',
         file: file,
