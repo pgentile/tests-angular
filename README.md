@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/pgentile/tests-angular.svg?branch=master)](https://travis-ci.org/pgentile/tests-angular)
+
 tests-angular
 =============
 
