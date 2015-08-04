@@ -7,8 +7,8 @@ node_js:
 
 before_script:
   - node node_modules/grunt-protractor-runner/scripts/webdriver-manager-update
-  - npm install -q grunt-cli
-  - npm install -q bower
+  - npm install -g grunt-cli
+  - npm install -g bower
   - bower install
 
 script:
