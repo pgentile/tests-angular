@@ -6,6 +6,8 @@ node_js:
   - "0.12"
 
 before_script:
-  - npm install
   - node node_modules/grunt-protractor-runner/scripts/webdriver-manager-update
   - bower install
+
+script:
+  - grunt dist test
